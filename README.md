@@ -22,4 +22,4 @@ TBD
 yarn start
 ```
 
-Open your browser and visit http://localhost:8080.
+Open your browser and visit https://localhost:8080/snowman-dapp/.
