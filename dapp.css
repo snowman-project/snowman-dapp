@@ -1,3 +1,61 @@
+:root {
+  --adm-color-primary: #1677ff;
+  --adm-color-success: #00b578;
+  --adm-color-warning: #ff8f1f;
+  --adm-color-danger: #ff3141;
+  --adm-color-white: #ffffff;
+  --adm-color-weak: #999999;
+  --adm-color-light: #cccccc;
+  --adm-border-color: #eeeeee;
+  --adm-font-size-main: 13px;
+  --adm-color-text: #333333;
+  --adm-font-family: -apple-system, blinkmacsystemfont, 'Helvetica Neue',
+    helvetica, segoe ui, arial, roboto, 'PingFang SC', 'miui',
+    'Hiragino Sans GB', 'Microsoft Yahei', sans-serif;
+}
+:root {
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
+body {
+  color: var(--adm-color-text);
+  font-size: var(--adm-font-size-main);
+  font-family: var(--adm-font-family);
+}
+* {
+  box-sizing: border-box;
+}
+a,
+button {
+  cursor: pointer;
+}
+a {
+  color: var(--adm-color-primary);
+  transition: opacity ease-in-out 0.2s;
+}
+a:active {
+  opacity: 0.8;
+}
+.adm-plain-anchor {
+  color: unset;
+  transition: none;
+}
+.adm-plain-anchor:active {
+  opacity: unset;
+}
+body.adm-overflow-hidden {
+  overflow: hidden !important;
+}
+div.adm-px-tester {
+  --size: 1;
+  height: calc(var(--size) / 2 * 2px);
+  width: 0;
+  position: fixed;
+  right: -100vw;
+  bottom: -100vh;
+  user-select: none;
+  pointer-events: none;
+}
+
 .gPKmhZ806IsM8fdUbqbB {
   display: flex;
   align-items: center;
@@ -18,12 +76,155 @@
   width: 40px;
   height: 40px;
   background: url(/snowman-dapp/4552c0c84c57e024f5b1.png);
+  background-position-y: 1px;
   background-size: cover;
   border-radius: 50%;
 }
 .YDHR1F0lflsiLrraQopT {
-  font-size: 18px;
+  font-size: 1.2rem;
   font-weight: bold;
+}
+
+.adm-button {
+  --color: var(--adm-color-white);
+  --text-color: var(--adm-button-text-color, var(--adm-color-text));
+  --background-color: var(--adm-button-background-color, var(--adm-color-white));
+  --border-radius: var(--adm-button-border-radius, 4px);
+  --border-width: var(--adm-button-border-width, 1px);
+  --border-style: var(--adm-button-border-style, solid);
+  --border-color: var(--adm-button-border-color, var(--adm-border-color));
+  color: var(--text-color);
+  background-color: var(--background-color);
+  position: relative;
+  display: inline-block;
+  box-sizing: border-box;
+  height: auto;
+  padding: 7px 16px;
+  margin: 0;
+  font-size: 15px;
+  line-height: 1.4;
+  text-align: center;
+  border: var(--border-width) var(--border-style) var(--border-color);
+  border-radius: var(--border-radius);
+  cursor: pointer;
+  transition: opacity ease 0.15s;
+  user-select: none;
+}
+.adm-button:focus {
+  outline: none;
+}
+.adm-button::before {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 100%;
+  height: 100%;
+  background-color: #000;
+  border: inherit;
+  border-color: #000;
+  border-radius: inherit;
+  transform: translate(-50%, -50%);
+  opacity: 0;
+  content: ' ';
+  box-sizing: content-box;
+}
+.adm-button:active::before {
+  opacity: 0.1;
+}
+.adm-button-default.adm-button-fill-outline {
+  --background-color: transparent;
+  --border-color: var(--adm-color-text);
+}
+.adm-button-default.adm-button-fill-none {
+  --background-color: transparent;
+  --border-color: transparent;
+}
+.adm-button:not(.adm-button-default) {
+  --text-color: var(--adm-color-white);
+  --background-color: var(--color);
+  --border-color: var(--color);
+}
+.adm-button:not(.adm-button-default).adm-button-fill-outline {
+  --text-color: var(--color);
+  --background-color: transparent;
+}
+.adm-button:not(.adm-button-default).adm-button-fill-none {
+  --text-color: var(--color);
+  --background-color: transparent;
+  --border-color: transparent;
+}
+.adm-button-primary {
+  --color: var(--adm-color-primary);
+}
+.adm-button-success {
+  --color: var(--adm-color-success);
+}
+.adm-button-danger {
+  --color: var(--adm-color-danger);
+}
+.adm-button-warning {
+  --color: var(--adm-color-warning);
+}
+.adm-button-block {
+  display: block;
+  width: 100%;
+}
+.adm-button-disabled {
+  cursor: not-allowed;
+  opacity: 0.4;
+}
+.adm-button-disabled:active::before {
+  display: none;
+}
+.adm-button.adm-button-mini {
+  padding: 3px 7px;
+  font-size: 13px;
+}
+.adm-button.adm-button-mini.adm-button-shape-rounded {
+  padding-left: 9px;
+  padding-right: 9px;
+}
+.adm-button.adm-button-small {
+  padding: 3px 11px;
+  font-size: 15px;
+}
+.adm-button.adm-button-large {
+  padding: 11px 22px;
+  font-size: 18px;
+}
+.adm-button.adm-button-shape-rounded {
+  --border-radius: 1000px;
+}
+.adm-button.adm-button-shape-rectangular {
+  --border-radius: 0;
+}
+.adm-button-loading {
+  vertical-align: bottom;
+}
+.adm-button-loading-wrapper {
+  display: flex;
+  height: 1.4em;
+  align-items: center;
+  justify-content: center;
+}
+.adm-button-loading-wrapper > .adm-loading {
+  opacity: 0.6;
+}
+
+.adm-loading {
+  display: inline-block;
+}
+
+.RgfOuxQbFzN1wTdrHzmi {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.EfqD1JDALxWm4NpM1lrH {
+  margin-top: 4px;
+  margin-bottom: 32px;
+  color: #888;
+  text-decoration: underline;
 }
 
 .drEgZdgN1BH3WaZh7MOe {
@@ -41,6 +242,18 @@
   width: 100%;
 }
 
+.NAwK_ICvekDNgELl1rnr {
+  padding: 12px;
+}
+
+.WKoSbtLWMeugqgt4GwLM {
+  padding-top: 60px;
+}
+
+:root:root {
+  --adm-color-primary: #e33638;
+  --adm-font-size-main: 16px;
+}
 * {
   box-sizing: border-box;
 }
@@ -48,15 +261,13 @@ html {
   overflow-x: hidden;
   overflow-y: auto;
 }
+body {
+  overflow-x: hidden;
+}
 html,
 body {
   margin: 0;
   padding: 0;
-  color: var(--text-color);
-  background: var(--background);
   font-family: pingfang-sc, sans-serif, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-}
-body {
-  padding-top: 60px;
 }
 
