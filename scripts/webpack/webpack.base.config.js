@@ -1,17 +1,17 @@
 const path = require('path');
 
+const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+
 module.exports = {
   entry: {
     dapp: path.resolve(__dirname, '../../src/index.tsx'),
-    'default-theme': path.resolve(
-      __dirname,
-      '../../src/themes/default/index.ts'
-    ),
   },
   output: {
     path: path.resolve(__dirname, '../../dist'),
     filename: '[name].js',
-    publicPath: '/',
+    publicPath: '/snowman-dapp/',
+    clean: true,
   },
   resolve: {
     extensions: ['.ts', '.tsx', '.js', '.jsx'],
@@ -36,4 +36,16 @@ module.exports = {
     react: 'React',
     web3: 'Web3',
   },
+  plugins: [
+    new ForkTsCheckerWebpackPlugin({
+      eslint: {
+        files: './src/**/*.{ts,tsx,js,jsx}',
+      },
+    }),
+    new HtmlWebpackPlugin({
+      filename: path.resolve(__dirname, '../../dist/index.html'),
+      template: path.resolve(__dirname, '../../src/index.html'),
+      inject: 'body',
+    }),
+  ],
 };

@@ -18,5 +18,6 @@ interface EthereumProvider {
    * Use request to submit RPC requests to Ethereum via MetaMask. It returns a Promise that resolves to the result of the RPC method call.
    * @param args A `RequestArguments` object.
    */
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   request(args: RequestArguments): Promise<any>;
 }

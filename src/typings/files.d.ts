@@ -3,4 +3,6 @@ declare module '*.module.less' {
   export = map;
 }
 
-declare module '*.png'
+declare module '*.png';
+
+declare module '*.jpg';
