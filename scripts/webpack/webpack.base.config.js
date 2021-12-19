@@ -1,10 +1,12 @@
 const path = require('path');
 
-console.info(path.resolve(__dirname, '../../src/index.ts'));
-
 module.exports = {
   entry: {
     dapp: path.resolve(__dirname, '../../src/index.tsx'),
+    'default-theme': path.resolve(
+      __dirname,
+      '../../src/themes/default/index.ts'
+    ),
   },
   output: {
     path: path.resolve(__dirname, '../../dist'),
@@ -22,5 +24,6 @@ module.exports = {
   },
   externals: {
     react: 'React',
+    web3: 'Web3',
   },
 };

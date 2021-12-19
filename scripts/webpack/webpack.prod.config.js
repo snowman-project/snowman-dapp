@@ -1,20 +1,18 @@
 const { merge } = require('webpack-merge');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 const base = require('./webpack.base.config.js');
 
 module.exports = merge(base, {
-  mode: 'development',
-  devtool: 'inline-source-map',
-  devServer: {
-    https: true,
-  },
+  mode: 'production',
   module: {
     rules: [
       {
         test: /\.less$/,
-        use: ['style-loader', 'css-loader', 'less-loader'],
+        use: [MiniCssExtractPlugin.loader, 'css-loader', 'less-loader'],
         exclude: /node_modules/,
       },
     ],
   },
+  plugins: [new MiniCssExtractPlugin()],
 });
