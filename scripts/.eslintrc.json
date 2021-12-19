@@ -1,0 +1,10 @@
+{
+  "env": {
+    "node": true,
+    "browser": false,
+    "es2021": true
+  },
+  "rules": {
+    "@typescript-eslint/no-var-requires": "off"
+  }
+}
