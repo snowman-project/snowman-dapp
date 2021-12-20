@@ -60,12 +60,14 @@ div.adm-px-tester {
   display: flex;
   align-items: center;
   position: fixed;
+  z-index: 9999999;
   top: 0;
   left: 0;
   right: 0;
   height: 60px;
   padding-left: 8px;
   padding-right: 8px;
+  background: var(--adm-background);
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
 .Czh3SBXnzxFnxI0to4pk {
@@ -75,7 +77,7 @@ div.adm-px-tester {
 .MAlHxfvmND5pA969X2Yy {
   width: 40px;
   height: 40px;
-  background: url(/snowman-dapp/4552c0c84c57e024f5b1.png);
+  background: url(/snowman-dapp/0157b5af8b1d7271832f.svg);
   background-position-y: 1px;
   background-size: cover;
   border-radius: 50%;
@@ -215,12 +217,12 @@ div.adm-px-tester {
   display: inline-block;
 }
 
-.RgfOuxQbFzN1wTdrHzmi {
+.J_f2Cpuc0zWf4Ifv5PcQ {
   display: flex;
   flex-direction: column;
   align-items: center;
 }
-.EfqD1JDALxWm4NpM1lrH {
+.GNqStnThQjUUec4Fyu17 {
   margin-top: 4px;
   margin-bottom: 32px;
   color: #888;
@@ -253,6 +255,7 @@ div.adm-px-tester {
 :root:root {
   --adm-color-primary: #e33638;
   --adm-font-size-main: 16px;
+  --adm-background: white;
 }
 * {
   box-sizing: border-box;
