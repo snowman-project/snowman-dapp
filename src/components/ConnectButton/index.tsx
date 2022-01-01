@@ -1,25 +1,39 @@
 import Button from 'antd-mobile/es/components/button';
-import React, { useCallback, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import styles from './index.module.less';
 
 export const ConnectButton: React.FC = () => {
-  const navigate = useNavigate();
   const [isConnecting, setConnecting] = useState(false);
-  const handleConnect = useCallback(async () => {
+  const [selectedAddress, setSelectedAddress] = useState<string | null>(null);
+  const navigate = useNavigate();
+  const handleConnectButtonClick = useCallback(async () => {
     setConnecting(true);
     try {
-      const accounts = await window.ethereum.request({
+      const accounts = await window.ethereum.request<string[]>({
         method: 'eth_requestAccounts',
       });
       setConnecting(false);
-      if (accounts.length > 0) {
+      if (accounts && accounts.length > 0) {
         navigate('/home');
       }
     } catch (e) {
       setConnecting(false);
     }
+  }, []);
+  const handleConnected = useCallback(() => {
+    window.setTimeout(() => {
+      if (window.ethereum.selectedAddress) {
+        setSelectedAddress(window.ethereum.selectedAddress);
+      }
+    }, 0);
+  }, []);
+  useEffect(() => {
+    window.ethereum.on('connect', handleConnected);
+    return () => {
+      window.ethereum.removeListener('connect', handleConnected);
+    };
   }, []);
   return (
     <div className={styles.container}>
@@ -30,9 +44,9 @@ export const ConnectButton: React.FC = () => {
           shape="rounded"
           loading={isConnecting}
           disabled={isConnecting}
-          onClick={handleConnect}
+          onClick={handleConnectButtonClick}
         >
-          立即连接
+          {selectedAddress ? '已连接' : '立即连接'}
         </Button>
         <a className={styles.learnMore}>了解更多</a>
       </>

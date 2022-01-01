@@ -6,14 +6,21 @@ export const HomePage = () => {
   const [account, setAccount] = useState<string>();
   const [balance, setBalance] = useState<string>();
   useEffect(() => {
-    window.ethereum.request({ method: 'eth_accounts' }).then((accounts) => {
-      setAccount(accounts[0]);
+    window.ethereum
+      .request<string[]>({ method: 'eth_accounts' })
+      .then((accounts) => {
+        if (accounts && accounts.length > 0) {
+          const myAccount = accounts[0];
+          if (myAccount) {
+            setAccount(myAccount);
 
-      const web3 = new Web3(window.ethereum as any);
-      web3.eth.getBalance(accounts[0]).then((b) => {
-        setBalance(b);
+            const web3 = new Web3(window.ethereum as any);
+            web3.eth.getBalance(myAccount).then((b) => {
+              setBalance(b);
+            });
+          }
+        }
       });
-    });
   }, []);
   return (
     <div className={styles.container}>
