@@ -13,6 +13,12 @@ module.exports = merge(base, {
     historyApiFallback: {
       index: '/snowman-dapp/index.html',
     },
+    client: {
+      overlay: {
+        errors: true,
+        warnings: false,
+      },
+    },
   },
   module: {
     rules: [
