@@ -10,8 +10,8 @@ import styles from './index.module.less';
 export const App = () => {
   return (
     <div className={styles.container}>
-      <AppHeader />
       <BrowserRouter basename="/snowman-dapp">
+        <AppHeader />
         <Routes>
           <Route index element={<LandingPage />} />
           <Route path="home" element={<HomePage />} />
