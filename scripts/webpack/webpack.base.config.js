@@ -46,10 +46,6 @@ module.exports = {
       filename: path.resolve(__dirname, '../../dist/index.html'),
       template: path.resolve(__dirname, '../../src/index.html'),
       inject: 'body',
-      favicon: path.resolve(
-        __dirname,
-        '../../src/assets/images/snowman-logo.svg'
-      ),
     }),
   ],
 };
