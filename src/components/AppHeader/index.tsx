@@ -2,8 +2,8 @@ import { useEthers } from '@usedapp/core';
 import { MoreOutline } from 'antd-mobile-icons';
 import NavBar from 'antd-mobile/es/components/nav-bar';
 import Popup from 'antd-mobile/es/components/popup';
-import React, { useState } from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { useState } from 'react';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 
 import { MainMenu } from '../MainMenu';
 
@@ -31,25 +31,27 @@ export function AppHeader() {
   const { account } = useEthers();
   const [visible, setVisible] = useState(false);
   const location = useLocation();
+  const navigate = useNavigate();
   const isConnected = !!account;
   const showBackArrow = isConnected && location.pathname !== '/';
-  const handleMoreClick = () => {
-    setVisible(!visible);
-  };
   return (
     <>
       <NavBar
         backArrow={showBackArrow}
+        onBack={() => navigate(-1)}
         className={styles.navBar}
         right={
-          isConnected ? (
-            <MoreOutline fontSize="1.5rem" onClick={handleMoreClick} />
-          ) : null
+          isConnected && (
+            <MoreOutline
+              fontSize="1.5rem"
+              onClick={() => setVisible(!visible)}
+            />
+          )
         }
       >
         <Brand />
       </NavBar>
-      {isConnected ? (
+      {isConnected && (
         <Popup
           visible={visible}
           position="right"
@@ -57,9 +59,9 @@ export function AppHeader() {
             setVisible(false);
           }}
         >
-          <MainMenu />
+          <MainMenu onClose={() => setVisible(false)} />
         </Popup>
-      ) : null}
+      )}
     </>
   );
 }
