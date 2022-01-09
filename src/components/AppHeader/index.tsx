@@ -9,25 +9,11 @@ import { MainMenu } from '../MainMenu';
 
 import styles from './index.module.less';
 
-function Brand() {
-  // return hideLogo ? (
-  //   <Link className={styles.brandLink} to="/">
-  //     <div className={styles.brandName}>Snowman</div>
-  //   </Link>
-  // ) : (
-  //   <Link className={styles.brandLinkWithLogo} to="/">
-  //     <div className={styles.brandLogo} />
-  //     <div className={styles.brandName}>Snowman</div>
-  //   </Link>
-  // );
-  return (
-    <Link className={styles.brandLink} to="/">
-      <span>Snowman</span>
-    </Link>
-  );
+export interface AppHeaderProps {
+  title?: string;
 }
 
-export function AppHeader() {
+export function AppHeader({ title }: AppHeaderProps) {
   const { account } = useEthers();
   const [visible, setVisible] = useState(false);
   const location = useLocation();
@@ -49,7 +35,7 @@ export function AppHeader() {
           )
         }
       >
-        <Brand />
+        {title ?? <Brand />}
       </NavBar>
       {isConnected && (
         <Popup
@@ -63,5 +49,23 @@ export function AppHeader() {
         </Popup>
       )}
     </>
+  );
+}
+
+function Brand() {
+  // return hideLogo ? (
+  //   <Link className={styles.brandLink} to="/">
+  //     <div className={styles.brandName}>Snowman</div>
+  //   </Link>
+  // ) : (
+  //   <Link className={styles.brandLinkWithLogo} to="/">
+  //     <div className={styles.brandLogo} />
+  //     <div className={styles.brandName}>Snowman</div>
+  //   </Link>
+  // );
+  return (
+    <Link className={styles.brandLink} to="/">
+      <span>Snowman</span>
+    </Link>
   );
 }
