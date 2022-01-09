@@ -3,12 +3,13 @@ import Button from 'antd-mobile/es/components/button';
 
 import styles from './index.module.less';
 
-export const ConnectButton: React.FC = () => {
+export function ConnectButton() {
   const { activateBrowserWallet, account } = useEthers();
   return (
     <div className={styles.container}>
       <>
         <Button
+          className={styles.button}
           color="primary"
           size="large"
           shape="rounded"
@@ -20,4 +21,4 @@ export const ConnectButton: React.FC = () => {
       </>
     </div>
   );
-};
+}
