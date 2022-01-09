@@ -3,7 +3,7 @@ import { ConnectButton } from '@/components/ConnectButton';
 import landingImage from '@/assets/images/snowman-landing.jpg';
 import styles from './index.module.less';
 
-export const LandingPage = () => {
+export function LandingPage() {
   return (
     <div className={styles.container}>
       <div className={styles.jumbotron}>
@@ -23,4 +23,4 @@ export const LandingPage = () => {
       </div>
     </div>
   );
-};
+}

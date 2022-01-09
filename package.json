@@ -42,7 +42,8 @@
   "dependencies": {
     "@metamask/providers": "^8.1.1",
     "@usedapp/core": "^0.7.3",
-    "antd-mobile": "^5.0.0-rc.6",
+    "antd-mobile": "^5.0.0-rc.15",
+    "antd-mobile-icons": "^0.2.2",
     "classnames": "^2.3.1",
     "history": "^5.2.0",
     "react": "^17.0.2",
