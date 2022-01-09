@@ -1,32 +1,18 @@
 @import '@/styles/variables.less';
 
-.container {
-  display: flex;
-  align-items: center;
-  position: fixed;
-  z-index: 9999999;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 60px;
-  padding-left: 8px;
-  padding-right: 8px;
-  background: @background;
+.navBar {
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  height: 56px;
 }
 
-.brand {
-  display: flex;
-  align-items: center;
-}
-
-.link {
-  display: flex;
-  align-items: center;
+.brandLink {
+  color: @color-text;
+  font-weight: bold;
+  font-size: 1.2rem;
   text-decoration: none;
 }
 
-.logo {
+.brandLogo {
   width: 40px;
   height: 40px;
   background: url('@/assets/images/snowman-logo.svg');
