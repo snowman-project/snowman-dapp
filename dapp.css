@@ -21,9 +21,6 @@ body {
   font-size: var(--adm-font-size-main);
   font-family: var(--adm-font-family);
 }
-* {
-  box-sizing: border-box;
-}
 a,
 button {
   cursor: pointer;
@@ -74,6 +71,11 @@ div.adm-px-tester {
   display: flex;
   align-items: center;
 }
+.FFDeQEeeHnzdBAQ9T5PA {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+}
 .MAlHxfvmND5pA969X2Yy {
   width: 40px;
   height: 40px;
@@ -85,6 +87,7 @@ div.adm-px-tester {
 .YDHR1F0lflsiLrraQopT {
   font-size: 1.2rem;
   font-weight: bold;
+  color: var(--adm-color-text);
 }
 
 .adm-button {
@@ -101,7 +104,7 @@ div.adm-px-tester {
   display: inline-block;
   box-sizing: border-box;
   height: auto;
-  padding: 7px 16px;
+  padding: 8px 12px;
   margin: 0;
   font-size: 15px;
   line-height: 1.4;
@@ -122,7 +125,6 @@ div.adm-px-tester {
   width: 100%;
   height: 100%;
   background-color: #000;
-  border: inherit;
   border-color: #000;
   border-radius: inherit;
   transform: translate(-50%, -50%);
@@ -131,7 +133,7 @@ div.adm-px-tester {
   box-sizing: content-box;
 }
 .adm-button:active::before {
-  opacity: 0.1;
+  opacity: 0.08;
 }
 .adm-button-default.adm-button-fill-outline {
   --background-color: transparent;
@@ -179,7 +181,8 @@ div.adm-px-tester {
   display: none;
 }
 .adm-button.adm-button-mini {
-  padding: 3px 7px;
+  padding-top: 3px;
+  padding-bottom: 3px;
   font-size: 13px;
 }
 .adm-button.adm-button-mini.adm-button-shape-rounded {
@@ -187,11 +190,13 @@ div.adm-px-tester {
   padding-right: 9px;
 }
 .adm-button.adm-button-small {
-  padding: 3px 11px;
+  padding-top: 3px;
+  padding-bottom: 3px;
   font-size: 15px;
 }
 .adm-button.adm-button-large {
-  padding: 11px 22px;
+  padding-top: 11px;
+  padding-bottom: 11px;
   font-size: 18px;
 }
 .adm-button.adm-button-shape-rounded {
@@ -227,13 +232,14 @@ div.adm-px-tester {
   margin-bottom: 32px;
   color: #888;
   text-decoration: underline;
+  font-size: smaller;
 }
 
 .drEgZdgN1BH3WaZh7MOe {
   width: 100%;
 }
 .eV9bICXDamSq9xMWe0Dw {
-  font-size: 1.5rem;
+  font-size: 6vw;
   font-weight: bold;
   text-align: center;
 }
