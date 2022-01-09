@@ -7,7 +7,7 @@ export const AppHeader: React.FC = () => {
     <div className={styles.container}>
       <div className={styles.brand}>
         <div className={styles.logo} />
-        <div className={styles.brandName}>雪人理财</div>
+        <div className={styles.brandName}>Snowman</div>
       </div>
     </div>
   );

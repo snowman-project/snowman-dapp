@@ -46,9 +46,9 @@ export const ConnectButton: React.FC = () => {
           disabled={isConnecting}
           onClick={handleConnectButtonClick}
         >
-          {selectedAddress ? '已连接' : '立即连接'}
+          {selectedAddress ? 'Connected' : 'Connect'}
         </Button>
-        <a className={styles.learnMore}>了解更多</a>
+        <a className={styles.learnMore}>Learn more</a>
       </>
     </div>
   );
