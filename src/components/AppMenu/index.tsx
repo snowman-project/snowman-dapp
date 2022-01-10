@@ -3,7 +3,6 @@ import {
   PayCircleOutline,
   ReceivePaymentOutline,
   UnorderedListOutline,
-  UserCircleOutline,
 } from 'antd-mobile-icons';
 import { useNavigate } from 'react-router';
 
@@ -20,12 +19,6 @@ export function AppMenu({ onClose }: AppMenuProps) {
   return (
     <div>
       <List header="我的账户">
-        <List.Item
-          prefix={<UserCircleOutline />}
-          onClick={() => jumpTo('/my/profile')}
-        >
-          账户资料
-        </List.Item>
         <List.Item
           prefix={<PayCircleOutline />}
           onClick={() => jumpTo('/my/balance')}
