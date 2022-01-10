@@ -18,7 +18,7 @@ export function useAccount() {
 
   const storageKey = `snowman.account.${account}.name`;
 
-  const changeAccountName = (name: string | null) => {
+  const changeAccountNickName = (name: string | null) => {
     if (!account) return;
     if (name === null) {
       localStorage.removeItem(storageKey);
@@ -28,5 +28,9 @@ export function useAccount() {
     setNameInState(name);
   };
 
-  return { account, accountName: nameInState, changeAccountName };
+  return {
+    account,
+    accountNickName: nameInState,
+    changeAccountNickName,
+  };
 }
