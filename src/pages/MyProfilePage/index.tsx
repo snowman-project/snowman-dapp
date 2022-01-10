@@ -63,6 +63,7 @@ export function MyProfilePage() {
                   ref={inputRef}
                   className={styles.nameInput}
                   placeholder="Nick name"
+                  maxLength={64}
                   value={editingAccountName}
                   onChange={(value) => {
                     setEditingAccountName(value);
