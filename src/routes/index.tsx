@@ -3,14 +3,26 @@ import type { RouteObject } from 'react-router-dom';
 import { LandingPage } from '@/pages/LandingPage';
 import { MyProfilePage } from '@/pages/MyProfilePage';
 
-export type RouteWithTitle = RouteObject & { title?: string };
+export interface RouteInfo extends RouteObject {
+  title?: string;
+  backPath?: string;
+  children?: RouteInfo[];
+}
 
-const routes: RouteWithTitle[] = [
-  { index: true, element: <LandingPage /> },
+const routes: RouteInfo[] = [
   {
-    path: '/my/profile',
-    title: 'My Profile',
-    element: <MyProfilePage />,
+    path: '/',
+    children: [
+      {
+        index: true,
+        element: <LandingPage />,
+      },
+      {
+        path: '/my/profile',
+        title: '个人信息',
+        element: <MyProfilePage />,
+      },
+    ],
   },
 ];
 
