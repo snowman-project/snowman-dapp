@@ -3,7 +3,9 @@ import { MoreOutline } from 'antd-mobile-icons';
 import NavBar from 'antd-mobile/es/components/nav-bar';
 import Popup from 'antd-mobile/es/components/popup';
 import { useState } from 'react';
-import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { Link, matchRoutes, useLocation, useNavigate } from 'react-router-dom';
+
+import routes, { RouteInfo } from '@/routes';
 
 import { AppSideBar } from '../AppSideBar';
 
@@ -20,11 +22,30 @@ export function AppHeader({ title }: AppHeaderProps) {
   const navigate = useNavigate();
   const isConnected = !!account;
   const showBackArrow = isConnected && location.pathname !== '/';
+  const handleBack = () => {
+    const matches = matchRoutes(routes, location.pathname);
+    if (matches) {
+      if (matches.length === 2) {
+        const rootPath = matches[0].route.path;
+        if (rootPath) {
+          navigate(rootPath);
+          return;
+        }
+      }
+      const match = matches[matches.length - 1];
+      const backPath = (match.route as RouteInfo).backPath;
+      if (backPath) {
+        navigate(backPath);
+        return;
+      }
+    }
+    navigate(-1);
+  };
   return (
     <>
       <NavBar
         backArrow={showBackArrow}
-        onBack={() => navigate(-1)}
+        onBack={handleBack}
         className={styles.navBar}
         right={
           isConnected && (
@@ -45,7 +66,7 @@ export function AppHeader({ title }: AppHeaderProps) {
             setVisible(false);
           }}
         >
-          <AppSideBar />
+          <AppSideBar onClose={() => setVisible(false)} />
         </Popup>
       )}
     </>
