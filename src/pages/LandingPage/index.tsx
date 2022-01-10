@@ -9,9 +9,9 @@ export function LandingPage() {
       <div className={styles.jumbotron}>
         <div className={styles.slogan}>
           <p>
-            Solid return at your fingertips
+            稳固收益，唾手可得
             <br />
-            Your exclusive DeFi solution
+            你的专属 DeFi 金融解决方案
           </p>
         </div>
       </div>

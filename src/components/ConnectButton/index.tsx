@@ -15,9 +15,9 @@ export function ConnectButton() {
           shape="rounded"
           onClick={() => activateBrowserWallet()}
         >
-          {account ? 'Connected' : 'Connect'}
+          {account ? '已连接到我的钱包' : '连接到我的钱包'}
         </Button>
-        <a className={styles.learnMore}>Learn more</a>
+        <a className={styles.learnMore}>进一步了解</a>
       </>
     </div>
   );

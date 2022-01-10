@@ -19,30 +19,28 @@ export function AppMenu({ onClose }: AppMenuProps) {
   };
   return (
     <div>
-      <List header="My Account">
+      <List header="我的账户">
         <List.Item
           prefix={<UserCircleOutline />}
           onClick={() => jumpTo('/my/profile')}
         >
-          Profile
+          账户资料
         </List.Item>
         <List.Item
           prefix={<PayCircleOutline />}
           onClick={() => jumpTo('/my/balance')}
         >
-          Balance
+          账户余额
         </List.Item>
         <List.Item
           prefix={<UnorderedListOutline />}
           onClick={() => jumpTo('/my/transactions')}
         >
-          Transactions
+          交易
         </List.Item>
       </List>
-      <List header="Invest">
-        <List.Item prefix={<ReceivePaymentOutline />}>
-          Dual Currency Investment
-        </List.Item>
+      <List header="投资与理财">
+        <List.Item prefix={<ReceivePaymentOutline />}>双币理财</List.Item>
       </List>
     </div>
   );
