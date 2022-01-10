@@ -31,7 +31,13 @@ export function AppSideBar({ onClose }: AppSideBarProps) {
       <div className={styles.container}>
         <List>
           <List.Item>
-            <div className={styles.brandName}>雪人理财</div>
+            <div className={styles.brand}>
+              <img
+                src={require('@/assets/images/snowman-logo.svg')}
+                className={styles.brandLogo}
+              />
+              <div className={styles.brandName}>雪人理财</div>
+            </div>
           </List.Item>
           <List.Item onClick={handleJumpToProfile}>
             <div className={styles.avatarAndAccountInfo}>

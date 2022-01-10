@@ -45,7 +45,6 @@ export function AppHeader({ title }: AppHeaderProps) {
     <>
       <NavBar
         backArrow={showBackArrow}
-        onBack={handleBack}
         className={styles.navBar}
         right={
           isConnected && (
@@ -55,8 +54,9 @@ export function AppHeader({ title }: AppHeaderProps) {
             />
           )
         }
+        onBack={handleBack}
       >
-        {title ?? <Brand />}
+        <Brand title={title} />
       </NavBar>
       {isConnected && (
         <Popup
@@ -73,20 +73,14 @@ export function AppHeader({ title }: AppHeaderProps) {
   );
 }
 
-function Brand() {
-  // return hideLogo ? (
-  //   <Link className={styles.brandLink} to="/">
-  //     <div className={styles.brandName}>Snowman</div>
-  //   </Link>
-  // ) : (
-  //   <Link className={styles.brandLinkWithLogo} to="/">
-  //     <div className={styles.brandLogo} />
-  //     <div className={styles.brandName}>Snowman</div>
-  //   </Link>
-  // );
+function Brand({ title }: AppHeaderProps) {
   return (
     <div className={styles.brandLink}>
-      <span>雪人理财</span>
+      <img
+        src={require('@/assets/images/snowman-logo.svg')}
+        className={styles.brandLogo}
+      />
+      <span>{title ?? '雪人理财'}</span>
     </div>
   );
 }
