@@ -5,7 +5,7 @@ import Popup from 'antd-mobile/es/components/popup';
 import { useState } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 
-import { MainMenu } from '../MainMenu';
+import { AppSideBar } from '../AppSideBar';
 
 import styles from './index.module.less';
 
@@ -45,7 +45,7 @@ export function AppHeader({ title }: AppHeaderProps) {
             setVisible(false);
           }}
         >
-          <MainMenu onClose={() => setVisible(false)} />
+          <AppSideBar />
         </Popup>
       )}
     </>

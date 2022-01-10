@@ -7,16 +7,18 @@ import {
 } from 'antd-mobile-icons';
 import { useNavigate } from 'react-router';
 
-import styles from './index.module.less';
+export interface AppMenuProps {
+  onClose?: () => void;
+}
 
-export function MainMenu({ onClose }: { onClose?: () => void }) {
+export function AppMenu({ onClose }: AppMenuProps) {
   const navigate = useNavigate();
   const jumpTo = (path: string) => {
     navigate(path);
     onClose && onClose();
   };
   return (
-    <div className={styles.container}>
+    <div>
       <List header="My Account">
         <List.Item
           prefix={<UserCircleOutline />}
