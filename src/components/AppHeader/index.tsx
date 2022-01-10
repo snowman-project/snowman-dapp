@@ -85,8 +85,8 @@ function Brand() {
   //   </Link>
   // );
   return (
-    <Link className={styles.brandLink} to="/">
+    <div className={styles.brandLink}>
       <span>雪人理财</span>
-    </Link>
+    </div>
   );
 }
