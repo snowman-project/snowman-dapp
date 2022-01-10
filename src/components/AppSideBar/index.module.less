@@ -1,3 +1,69 @@
+@import '@/styles/variables.less';
+
 .container {
   width: 300px;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  height: 64px;
+  padding-left: 12px;
+}
+
+.brandLogo {
+  width: 32px;
+  height: 32px;
+  margin-right: 12px;
+  background-color: white;
+  background-image: url('@/assets/images/snowman-logo.svg');
+  background-position-y: 1px;
+  background-size: cover;
+  border-radius: 50%;
+}
+
+.brandName {
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+
+.avatarAndAccountInfo {
+  display: flex;
+  align-items: center;
+}
+
+.avatar {
+  @avatar-size: 56px;
+  @avatar-spacing: 12px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: @avatar-size;
+  height: @avatar-size;
+  margin-top: @avatar-spacing;
+  margin-bottom: @avatar-spacing;
+  background-color: white;
+  border: 2px solid #aaa;
+  border-radius: 50%;
+
+  .avatarSVG {
+    width: @avatar-size - @avatar-spacing;
+    height: @avatar-size - @avatar-spacing;
+    background-color: white;
+    border-radius: 50%;
+  }
+}
+
+.accountInfo {
+  padding-left: 12px;
+}
+
+.accountNickName {
+  margin: 0;
+}
+
+.accountAddress {
+  color: @color-weak;
+  font-size: smaller;
 }
