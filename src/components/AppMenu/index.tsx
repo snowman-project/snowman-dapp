@@ -23,7 +23,7 @@ export function AppMenu({ onClose }: AppMenuProps) {
           prefix={<PayCircleOutline />}
           onClick={() => jumpTo('/my/balance')}
         >
-          账户余额
+          余额
         </List.Item>
         <List.Item
           prefix={<UnorderedListOutline />}
