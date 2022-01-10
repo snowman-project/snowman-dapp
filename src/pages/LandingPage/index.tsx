@@ -11,7 +11,7 @@ export function LandingPage() {
           <p>
             稳固收益，唾手可得
             <br />
-            你的专属 DeFi 金融解决方案
+            您的专属 DeFi 金融解决方案
           </p>
         </div>
       </div>
