@@ -629,6 +629,12 @@ a.adm-list-item.adm-list-item-disabled:active {
 }
 
 .O_n4r2BBMcqCG952Bg10 {
+  position: fixed;
+  z-index: 2;
+  top: 0;
+  left: 0;
+  right: 0;
+  background: white;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
   height: 56px;
 }
@@ -652,6 +658,9 @@ a.adm-list-item.adm-list-item-disabled:active {
   color: var(--adm-color-text);
 }
 
+.WKoSbtLWMeugqgt4GwLM {
+  padding-top: 56px;
+}
 
 :root:root {
   --adm-color-primary: #e33638;
