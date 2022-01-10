@@ -1,3 +1,5 @@
+@import '@/styles/variables.less';
+
 .container {
   display: flex;
   justify-content: center;
@@ -14,6 +16,7 @@
   display: flex;
   align-items: center;
   margin: 24px;
+  height: 38px;
   font-size: 1.5rem;
 
   .editButton {
@@ -32,8 +35,8 @@
 .address {
   width: 240px;
   padding: 12px;
-  margin-top: 24px;
+  margin-top: 36px;
   word-wrap: break-word;
-  background-color: rgba(0, 0, 0, 0.1);
+  background-color: @color-light;
   cursor: pointer;
 }

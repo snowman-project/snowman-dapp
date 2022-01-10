@@ -11,7 +11,7 @@ import styles from './index.module.less';
 const QR_CODE_IMAGE_SIZE = 180;
 
 export function MyProfilePage() {
-  const { account, accountName, changeAccountName } = useAccount();
+  const { account, accountNickName, changeAccountNickName } = useAccount();
   const [editing, setEditing] = useState(false);
   const [editingAccountName, setEditingAccountName] = useState('');
   const inputRef = useRef<any>(null);
@@ -32,7 +32,7 @@ export function MyProfilePage() {
       Toast.show('Copied to clipboard');
     };
     const handleEdit = () => {
-      setEditingAccountName(accountName ?? '');
+      setEditingAccountName(accountNickName ?? '');
       setEditing(true);
       setTimeout(() => {
         inputRef.current?.focus();
@@ -42,13 +42,14 @@ export function MyProfilePage() {
       const length = editingAccountName.trim().length;
       if (length) {
         if (length <= 64) {
-          changeAccountName(editingAccountName.trim());
+          changeAccountNickName(editingAccountName.trim());
           setEditing(false);
         } else {
           Toast.show('The nick name is too long. Max length is 64.');
         }
       } else {
-        changeAccountName(null);
+        changeAccountNickName(null);
+        setEditing(false);
       }
     };
 
@@ -73,7 +74,7 @@ export function MyProfilePage() {
             ) : (
               <>
                 <div className={styles.readonly}>
-                  {accountName ?? shortenAddress(account)}
+                  {accountNickName ?? shortenAddress(account)}
                 </div>
                 <EditSOutline
                   className={styles.editButton}
