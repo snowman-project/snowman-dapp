@@ -2,7 +2,7 @@ import { DAppProvider } from '@usedapp/core';
 import { useLocation, matchRoutes, useRoutes } from 'react-router-dom';
 
 import { AppHeader } from '@/components/AppHeader';
-import routes, { RouteWithTitle } from '@/routes';
+import routes, { RouteInfo } from '@/routes';
 import useDAppConfig from '@/use-dapp.config';
 
 import styles from './index.module.less';
@@ -12,9 +12,9 @@ export function App() {
   const location = useLocation();
   const matches = matchRoutes(routes, location.pathname);
   let title: string | undefined = undefined;
-  if (matches && matches.length === 1) {
-    const match = matches[0];
-    const route: RouteWithTitle = match.route;
+  if (matches) {
+    const match = matches[matches.length - 1];
+    const route: RouteInfo = match.route;
     if (route.title) {
       title = route.title;
     }
