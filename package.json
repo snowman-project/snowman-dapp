@@ -9,6 +9,7 @@
     "build": "webpack --config scripts/webpack/webpack.prod.config.js",
     "deploy": "npm run build && echo 'Publishing DApp to GitHub pages...' && gh-pages -d dist",
     "dev": "webpack-dev-server --config scripts/webpack/webpack.dev.config.js",
+    "profile": "webpack --profile --config scripts/webpack/webpack.prod.config.js --json > dist/webpack-bundle-stats.json",
     "start": "npm run dev"
   },
   "repository": {
@@ -40,12 +41,10 @@
     "webpackbar": "^5.0.2"
   },
   "dependencies": {
-    "@metamask/providers": "^8.1.1",
     "@usedapp/core": "^0.7.3",
     "antd-mobile": "^5.0.0-rc.15",
     "antd-mobile-icons": "^0.2.2",
     "classnames": "^2.3.1",
-    "cryptocurrency-icons": "^0.18.0",
     "eventemitter3": "^4.0.7",
     "history": "^5.2.0",
     "react": "^17.0.2",
