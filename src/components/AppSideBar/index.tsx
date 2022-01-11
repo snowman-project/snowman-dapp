@@ -1,5 +1,5 @@
 import { shortenAddress } from '@usedapp/core';
-import List from 'antd-mobile/es/components/list';
+import { List } from 'antd-mobile';
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router';
 

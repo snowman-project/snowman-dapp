@@ -1,6 +1,5 @@
 import { shortenAddress } from '@usedapp/core';
-import Toast from 'antd-mobile/es/components/toast';
-import Input from 'antd-mobile/es/components/input';
+import { Input, Toast } from 'antd-mobile';
 import { CheckCircleOutline, EditSOutline } from 'antd-mobile-icons';
 import { useMemo, useRef, useState } from 'react';
 

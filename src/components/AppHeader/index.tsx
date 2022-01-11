@@ -1,7 +1,6 @@
 import { useEthers } from '@usedapp/core';
+import { NavBar, Popup } from 'antd-mobile';
 import { MoreOutline } from 'antd-mobile-icons';
-import NavBar from 'antd-mobile/es/components/nav-bar';
-import Popup from 'antd-mobile/es/components/popup';
 import { useState } from 'react';
 import { matchRoutes, useLocation, useNavigate } from 'react-router-dom';
 

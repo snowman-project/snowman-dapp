@@ -1,5 +1,5 @@
 import { useEthers } from '@usedapp/core';
-import Button from 'antd-mobile/es/components/button';
+import { Button } from 'antd-mobile';
 
 import styles from './index.module.less';
 

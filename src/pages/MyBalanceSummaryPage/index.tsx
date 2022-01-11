@@ -1,5 +1,5 @@
 import { useContractCalls } from '@usedapp/core';
-import List from 'antd-mobile/es/components/list';
+import { List } from 'antd-mobile';
 import { useNavigate } from 'react-router';
 import { BigNumber } from 'ethers';
 

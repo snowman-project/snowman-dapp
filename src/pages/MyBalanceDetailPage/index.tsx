@@ -1,6 +1,5 @@
 import { useContractCall } from '@usedapp/core';
-import Button from 'antd-mobile/es/components/button';
-import Card from 'antd-mobile/es/components/card';
+import { Button, Card } from 'antd-mobile';
 import { BigNumber } from 'ethers';
 import { useNavigate, useParams } from 'react-router';
 

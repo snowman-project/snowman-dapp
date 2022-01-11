@@ -1,4 +1,4 @@
-import List from 'antd-mobile/es/components/list';
+import { List } from 'antd-mobile';
 import {
   PayCircleOutline,
   ReceivePaymentOutline,
