@@ -1,6 +1,7 @@
 import type { RouteObject } from 'react-router-dom';
 
 import { LandingPage } from '@/pages/LandingPage';
+import { MyBalanceDepositPage } from '@/pages/MyBalanceDepositPage';
 import { MyBalanceDetailPage } from '@/pages/MyBalanceDetailPage';
 import { MyBalanceSummaryPage } from '@/pages/MyBalanceSummaryPage';
 import { MyProfilePage } from '@/pages/MyProfilePage';
@@ -37,9 +38,18 @@ const routes: RouteInfo[] = [
               },
               {
                 path: ':symbol',
-                title: '余额明细',
-                element: <MyBalanceDetailPage />,
-                caseSensitive: false,
+                children: [
+                  {
+                    index: true,
+                    title: '余额明细',
+                    element: <MyBalanceDetailPage />,
+                  },
+                  {
+                    path: 'deposit',
+                    title: '充值',
+                    element: <MyBalanceDepositPage />,
+                  },
+                ],
               },
             ],
           },
