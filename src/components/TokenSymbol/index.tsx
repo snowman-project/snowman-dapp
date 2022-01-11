@@ -22,7 +22,7 @@ export function TokenSymbol({
 }
 
 export function getTokenIcon(tokenSymbol: string) {
-  return require(`cryptocurrency-icons/svg/color/${
+  return `https://unpkg.com/cryptocurrency-icons@0.18.0/svg/color/${
     tokenSymbol === 'WETH' ? 'eth' : tokenSymbol.toLowerCase()
-  }.svg`);
+  }.svg`;
 }
