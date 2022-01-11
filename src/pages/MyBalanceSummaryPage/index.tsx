@@ -38,7 +38,7 @@ export function MyBalanceSummaryPage() {
           return (
             <List.Item
               key={tokenSymbol}
-              extra={<h3>{formatERC20(balance, tokenMetadata)}</h3>}
+              extra={<h3>{formatERC20(balance, tokenMetadata) ?? '-'}</h3>}
               onClick={() => navigate(tokenSymbol.toLowerCase())}
             >
               <div className={styles.listItem}>
