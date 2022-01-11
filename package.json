@@ -42,7 +42,7 @@
   },
   "dependencies": {
     "@usedapp/core": "^0.7.3",
-    "antd-mobile": "^5.0.0-rc.15",
+    "antd-mobile": "^5.0.0-rc.17",
     "antd-mobile-icons": "^0.2.2",
     "classnames": "^2.3.1",
     "eventemitter3": "^4.0.7",
