@@ -13,8 +13,8 @@ import { formatERC20 } from '@/utils/format-erc20';
 import styles from './index.module.less';
 
 export function MyBalanceDetailPage() {
-  const params = useParams();
   const navigate = useNavigate();
+  const params = useParams();
   if (params.symbol) {
     const tokenSymbol = params.symbol.toUpperCase();
     const tokenMetadata = config.supportedTokens.find(
@@ -57,7 +57,7 @@ function Balance({ tokenMetadata }: { tokenMetadata: ERC20Metadata }) {
         title={<TokenSymbol symbol={tokenMetadata.symbol} />}
       >
         <div className={styles.balanceValue}>
-          {formatERC20(result, tokenMetadata)}
+          {formatERC20(result, tokenMetadata) ?? '-'}
         </div>
       </Card>
     </div>
