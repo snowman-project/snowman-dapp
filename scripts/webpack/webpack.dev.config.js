@@ -9,7 +9,6 @@ module.exports = merge(base, {
   mode: 'development',
   devtool: 'inline-source-map',
   devServer: {
-    https: true,
     historyApiFallback: {
       index: '/snowman-dapp/index.html',
     },

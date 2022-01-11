@@ -1,8 +1,8 @@
 import { BigNumber, ethers } from 'ethers';
 
-import { ERC20Metadata } from '@/metadata';
+import { ERC20Contract } from '@/contracts';
 
-export function formatERC20(num: BigNumber | undefined, token: ERC20Metadata) {
+export function formatERC20(num: BigNumber | undefined, token: ERC20Contract) {
   if (typeof num === 'undefined') {
     return null;
   }

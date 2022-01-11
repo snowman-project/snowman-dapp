@@ -1,49 +1,72 @@
+import { useContractFunction, useEthers, useTokenBalance } from '@usedapp/core';
 import {
   Button,
   Card,
   List,
   NumberKeyboard,
+  Result,
   Toast,
   VirtualInput,
 } from 'antd-mobile';
-import { ethers } from 'ethers';
+import { ethers, Contract } from 'ethers';
 import { useEffect, useRef, useState } from 'react';
-import { useParams } from 'react-router';
+import { useNavigate, useParams } from 'react-router';
 
 import config from '@/config';
 import { TokenSymbol } from '@/components/TokenSymbol';
-import { useAccount } from '@/hooks';
-import { useTokenBalance } from '@usedapp/core';
 import { formatERC20 } from '@/utils/format-erc20';
 
 import styles from './index.module.less';
+import { SnowmanAccount } from '@/contracts';
 
 export function MyBalanceDepositPage() {
   const params = useParams();
-  const { account } = useAccount();
+  const navigate = useNavigate();
+  const { account, library } = useEthers();
+  const readonlyToken = params.symbol
+    ? config.supportedTokens.find(
+        (token) => token.symbol === params.symbol?.toUpperCase()
+      )
+    : undefined;
+  const tokenBalance = useTokenBalance(
+    account && readonlyToken?.address,
+    account
+  );
+  const { state: depositState, send: deposit } = useContractFunction(
+    SnowmanAccount,
+    'deposit'
+  );
   const [amount, setAmount] = useState<number | null>(null);
   const inputRef = useRef<any>(null);
   useEffect(() => {
     inputRef.current?.focus();
   }, []);
-  if (params.symbol) {
-    const tokenSymbol = params.symbol.toUpperCase();
-    const tokenMetadata = config.supportedTokens.find(
-      (token) => token.symbol === tokenSymbol
+  if (depositState.status === 'Success') {
+    return (
+      <div className={styles.container}>
+        <Result
+          className={styles.result}
+          status="success"
+          title={
+            readonlyToken && amount ? `+ ${amount} ${readonlyToken.symbol}` : ''
+          }
+          description={readonlyToken && `您的雪人账户余额已成功充值`}
+        />
+        <Button block color="success" onClick={() => navigate(-1)}>
+          返回
+        </Button>
+      </div>
     );
-    const tokenBalance = useTokenBalance(
-      account && tokenMetadata?.address,
-      account
-    );
-    if (tokenMetadata) {
+  } else if (account && library && params.symbol) {
+    if (readonlyToken) {
       const handleAmountChange = (value: string) => {
         setAmount(parseInt(value));
       };
-      const handleDeposit = () => {
+      const handleDeposit = async () => {
         if (amount && tokenBalance) {
           const amountBN = ethers.utils.parseUnits(
             amount.toString(),
-            tokenMetadata.decimals
+            readonlyToken.decimals
           );
           if (amountBN.gt(tokenBalance)) {
             Toast.show({ content: '余额不足', icon: 'fail' });
@@ -55,11 +78,21 @@ export function MyBalanceDepositPage() {
             duration: 0,
             maskClickable: false,
           });
+
+          const signer = library.getSigner(account);
+          const token = new Contract(
+            readonlyToken.address,
+            readonlyToken.interface,
+            signer
+          );
+          await token.approve(SnowmanAccount.address, amountBN);
+          await deposit(token.address, amountBN);
+          Toast.clear();
         }
       };
       const handleDepositAll = () => {
         if (tokenBalance) {
-          const a = formatERC20(tokenBalance, tokenMetadata);
+          const a = formatERC20(tokenBalance, readonlyToken);
           if (a) {
             const fixAmount = parseInt(a);
             if (fixAmount > 0) {
@@ -74,9 +107,8 @@ export function MyBalanceDepositPage() {
           <div className={styles.container}>
             <div className={styles.info}>充值金额将从您电子钱包账户中扣除</div>
             <Card
-              className={styles.card}
               title="充值金额"
-              extra={<TokenSymbol symbol={tokenMetadata.symbol}></TokenSymbol>}
+              extra={<TokenSymbol symbol={readonlyToken.symbol}></TokenSymbol>}
             >
               <VirtualInput
                 ref={inputRef}
@@ -111,7 +143,7 @@ export function MyBalanceDepositPage() {
                 }
               >
                 <b className={styles.availTokenBalance}>
-                  {formatERC20(tokenBalance, tokenMetadata)}
+                  {formatERC20(tokenBalance, readonlyToken)}
                 </b>
               </List.Item>
             </List>

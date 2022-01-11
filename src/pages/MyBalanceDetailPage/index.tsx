@@ -5,7 +5,7 @@ import { useNavigate, useParams } from 'react-router';
 
 import config from '@/config';
 import { TokenSymbol } from '@/components/TokenSymbol';
-import { ERC20Metadata, SnowmanAccountMetadata } from '@/metadata';
+import { ERC20Contract, SnowmanAccount } from '@/contracts';
 import { useAccount } from '@/hooks';
 import { formatERC20 } from '@/utils/format-erc20';
 
@@ -16,13 +16,13 @@ export function MyBalanceDetailPage() {
   const params = useParams();
   if (params.symbol) {
     const tokenSymbol = params.symbol.toUpperCase();
-    const tokenMetadata = config.supportedTokens.find(
+    const token = config.supportedTokens.find(
       (token) => token.symbol === tokenSymbol
     );
-    if (tokenMetadata) {
+    if (token) {
       return (
         <div className={styles.container}>
-          <Balance tokenMetadata={tokenMetadata} />
+          <Balance token={token} />
           <Button
             block
             color="primary"
@@ -39,24 +39,26 @@ export function MyBalanceDetailPage() {
   return <div>Unsupported token</div>;
 }
 
-function Balance({ tokenMetadata }: { tokenMetadata: ERC20Metadata }) {
+function Balance({ token }: { token: ERC20Contract }) {
   const { account } = useAccount();
   const [result] = (useContractCall(
     account && {
-      ...SnowmanAccountMetadata,
+      address: SnowmanAccount.address,
+      abi: SnowmanAccount.interface,
       method: 'balanceOf',
-      args: [account, tokenMetadata.address],
+      args: [account, token.address],
     }
   ) ?? []) as (BigNumber | undefined)[];
   return (
     <div className={styles.balanceContainer}>
+      <div className={styles.info}>我在雪人账户中持有的</div>
       <Card
         className={styles.balanceCard}
         headerClassName={styles.balanceCardHeader}
-        title={<TokenSymbol symbol={tokenMetadata.symbol} />}
+        title={<TokenSymbol symbol={token.symbol} />}
       >
         <div className={styles.balanceValue}>
-          {formatERC20(result, tokenMetadata) ?? '-'}
+          {formatERC20(result, token) ?? '-'}
         </div>
       </Card>
     </div>
