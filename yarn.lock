@@ -1613,6 +1613,11 @@ cross-spawn@^7.0.2, cross-spawn@^7.0.3:
     shebang-command "^2.0.0"
     which "^2.0.1"
 
+cryptocurrency-icons@^0.18.0:
+  version "0.18.0"
+  resolved "https://registry.npmmirror.com/cryptocurrency-icons/download/cryptocurrency-icons-0.18.0.tgz#823552afcd299f4899d26a869252d1d27b004bc0"
+  integrity sha1-gjVSr80pn0iZ0mqGklLR0nsAS8A=
+
 css-loader@^6.5.1:
   version "6.5.1"
   resolved "https://registry.npmmirror.com/css-loader/download/css-loader-6.5.1.tgz#0c43d4fbe0d97f699c91e9818cb585759091d1b1"
