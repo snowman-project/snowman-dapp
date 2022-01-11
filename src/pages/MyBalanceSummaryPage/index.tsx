@@ -25,7 +25,7 @@ export function MyBalanceSummaryPage() {
   const navigate = useNavigate();
   return (
     <div>
-      <List header="余额明细">
+      <List header="我在雪人账户中持有的">
         {results.map((result, i) => {
           if (!result) {
             return;
