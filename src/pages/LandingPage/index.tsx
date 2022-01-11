@@ -1,6 +1,6 @@
 import { ConnectButton } from '@/components/ConnectButton';
 
-import landingImage from '@/assets/images/snowman-landing.jpg';
+import landingImage from '@/assets/images/snowman-landing.png';
 import styles from './index.module.less';
 
 export function LandingPage() {
