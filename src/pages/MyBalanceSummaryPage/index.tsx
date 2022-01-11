@@ -9,6 +9,8 @@ import { useAccount } from '@/hooks';
 import { SnowmanAccountMetadata } from '@/metadata';
 import { formatERC20 } from '@/utils/format-erc20';
 
+import styles from './index.module.less';
+
 export function MyBalanceSummaryPage() {
   const { account } = useAccount();
   const results =
@@ -36,10 +38,22 @@ export function MyBalanceSummaryPage() {
           return (
             <List.Item
               key={tokenSymbol}
-              extra={formatERC20(balance, tokenMetadata)}
+              extra={<h3>{formatERC20(balance, tokenMetadata)}</h3>}
               onClick={() => navigate(tokenSymbol.toLowerCase())}
             >
-              <TokenSymbol symbol={tokenSymbol} />
+              <div className={styles.listItem}>
+                <div>
+                  <TokenSymbol
+                    symbol={tokenSymbol}
+                    displayText={false}
+                    size="2.4rem"
+                  />
+                </div>
+                <div className={styles.twoLines}>
+                  <h3>{tokenSymbol}</h3>
+                  <div>{tokenMetadata.name}</div>
+                </div>
+              </div>
             </List.Item>
           );
         })}
