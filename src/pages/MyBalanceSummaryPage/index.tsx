@@ -1,57 +1,48 @@
 import { useContractCalls } from '@usedapp/core';
 import List from 'antd-mobile/es/components/list';
-import { ethers } from 'ethers';
+import { useNavigate } from 'react-router';
+import { BigNumber } from 'ethers';
 
+import config from '@/config';
+import { TokenSymbol as TokenSymbol } from '@/components/TokenSymbol';
 import { useAccount } from '@/hooks';
-import { SnowmanAccountMetadata, USDCMetadata, WETHMetadata } from '@/metadata';
-
-import styles from './index.module.less';
+import { SnowmanAccountMetadata } from '@/metadata';
+import { formatERC20 } from '@/utils/format-erc20';
 
 export function MyBalanceSummaryPage() {
   const { account } = useAccount();
-  const [usdcBalance, wethBalance] = useContractCalls([
-    account && {
-      ...SnowmanAccountMetadata,
-      method: 'balanceOf',
-      args: [account, USDCMetadata.address],
-    },
-    account && {
-      ...SnowmanAccountMetadata,
-      method: 'balanceOf',
-      args: [account, WETHMetadata.address],
-    },
-  ]) ?? [[], []];
+  const results =
+    useContractCalls(
+      config.supportedTokens.map(
+        (metadata) =>
+          account && {
+            ...SnowmanAccountMetadata,
+            method: 'balanceOf',
+            args: [account, metadata.address],
+          }
+      )
+    ) ?? [];
+  const navigate = useNavigate();
   return (
     <div>
       <List header="余额明细">
-        <List.Item
-          extra={
-            usdcBalance &&
-            ethers.utils.formatUnits(usdcBalance[0], USDCMetadata.decimals)
+        {results.map((result, i) => {
+          if (!result) {
+            return;
           }
-        >
-          <div className={styles.cryptoWithLogo}>
-            <img
-              src={require('cryptocurrency-icons/svg/color/usdc.svg')}
-              width="20"
-            />
-            <span>USDT</span>
-          </div>
-        </List.Item>
-        <List.Item
-          extra={
-            wethBalance &&
-            ethers.utils.formatUnits(wethBalance[0], WETHMetadata.decimals)
-          }
-        >
-          <div className={styles.cryptoWithLogo}>
-            <img
-              src={require('cryptocurrency-icons/svg/color/eth.svg')}
-              width="20"
-            />
-            <span>WETH</span>
-          </div>
-        </List.Item>
+          const balance = result[0] as BigNumber | undefined;
+          const tokenMetadata = config.supportedTokens[i];
+          const tokenSymbol = tokenMetadata.symbol;
+          return (
+            <List.Item
+              key={tokenSymbol}
+              extra={formatERC20(balance, tokenMetadata)}
+              onClick={() => navigate(tokenSymbol.toLowerCase())}
+            >
+              <TokenSymbol symbol={tokenSymbol} />
+            </List.Item>
+          );
+        })}
       </List>
     </div>
   );
