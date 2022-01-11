@@ -6,6 +6,7 @@ export interface ContractMetadata {
 }
 
 export interface ERC20Metadata extends ContractMetadata {
+  name: string;
   symbol: string;
   decimals: number;
 }
