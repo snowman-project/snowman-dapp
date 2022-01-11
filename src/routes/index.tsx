@@ -1,6 +1,8 @@
 import type { RouteObject } from 'react-router-dom';
 
 import { LandingPage } from '@/pages/LandingPage';
+import { MyBalanceDetailPage } from '@/pages/MyBalanceDetailPage';
+import { MyBalanceSummaryPage } from '@/pages/MyBalanceSummaryPage';
 import { MyProfilePage } from '@/pages/MyProfilePage';
 
 export interface RouteInfo extends RouteObject {
@@ -18,9 +20,30 @@ const routes: RouteInfo[] = [
         element: <LandingPage />,
       },
       {
-        path: '/my/profile',
-        title: '个人信息',
-        element: <MyProfilePage />,
+        path: 'my',
+        children: [
+          {
+            path: 'profile',
+            title: '个人信息',
+            element: <MyProfilePage />,
+          },
+          {
+            path: 'balance',
+            children: [
+              {
+                index: true,
+                title: '余额',
+                element: <MyBalanceSummaryPage />,
+              },
+              {
+                path: ':symbol',
+                title: '余额明细',
+                element: <MyBalanceDetailPage />,
+                caseSensitive: false,
+              },
+            ],
+          },
+        ],
       },
     ],
   },
