@@ -1,11 +1,16 @@
+import { useContractCall } from '@usedapp/core';
+import Button from 'antd-mobile/es/components/button';
+import Card from 'antd-mobile/es/components/card';
 import { BigNumber } from 'ethers';
 import { useParams } from 'react-router';
 
 import config from '@/config';
+import { TokenSymbol } from '@/components/TokenSymbol';
 import { ERC20Metadata, SnowmanAccountMetadata } from '@/metadata';
-import { useContractCall } from '@usedapp/core';
 import { useAccount } from '@/hooks';
 import { formatERC20 } from '@/utils/format-erc20';
+
+import styles from './index.module.less';
 
 export function MyBalanceDetailPage() {
   const params = useParams();
@@ -15,7 +20,14 @@ export function MyBalanceDetailPage() {
       (token) => token.symbol === tokenSymbol
     );
     if (tokenMetadata) {
-      return <Balance tokenMetadata={tokenMetadata} />;
+      return (
+        <div className={styles.container}>
+          <Balance tokenMetadata={tokenMetadata} />
+          <Button block color="primary" shape="rounded" size="large">
+            充值
+          </Button>
+        </div>
+      );
     }
   }
   return <div>Unsupported token</div>;
@@ -30,5 +42,17 @@ function Balance({ tokenMetadata }: { tokenMetadata: ERC20Metadata }) {
       args: [account, tokenMetadata.address],
     }
   ) ?? []) as (BigNumber | undefined)[];
-  return <div>{formatERC20(result, tokenMetadata)}</div>;
+  return (
+    <div className={styles.balanceContainer}>
+      <Card
+        className={styles.balanceCard}
+        headerClassName={styles.balanceCardHeader}
+        title={<TokenSymbol symbol={tokenMetadata.symbol} />}
+      >
+        <div className={styles.balanceValue}>
+          {formatERC20(result, tokenMetadata)}
+        </div>
+      </Card>
+    </div>
+  );
 }
