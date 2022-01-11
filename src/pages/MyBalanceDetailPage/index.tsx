@@ -2,7 +2,7 @@ import { useContractCall } from '@usedapp/core';
 import Button from 'antd-mobile/es/components/button';
 import Card from 'antd-mobile/es/components/card';
 import { BigNumber } from 'ethers';
-import { useParams } from 'react-router';
+import { useNavigate, useParams } from 'react-router';
 
 import config from '@/config';
 import { TokenSymbol } from '@/components/TokenSymbol';
@@ -14,6 +14,7 @@ import styles from './index.module.less';
 
 export function MyBalanceDetailPage() {
   const params = useParams();
+  const navigate = useNavigate();
   if (params.symbol) {
     const tokenSymbol = params.symbol.toUpperCase();
     const tokenMetadata = config.supportedTokens.find(
@@ -23,7 +24,13 @@ export function MyBalanceDetailPage() {
       return (
         <div className={styles.container}>
           <Balance tokenMetadata={tokenMetadata} />
-          <Button block color="primary" shape="rounded" size="large">
+          <Button
+            block
+            color="primary"
+            shape="rounded"
+            size="large"
+            onClick={() => navigate('deposit')}
+          >
             充值
           </Button>
         </div>
