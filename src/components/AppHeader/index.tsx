@@ -1,7 +1,8 @@
 import { useEthers } from '@usedapp/core';
 import { NavBar, Popup } from 'antd-mobile';
 import { MoreOutline } from 'antd-mobile-icons';
-import { useState } from 'react';
+import { EventEmitter } from 'eventemitter3';
+import { useEffect, useState } from 'react';
 import { matchRoutes, useLocation, useNavigate } from 'react-router-dom';
 
 import routes, { RouteInfo } from '@/routes';
@@ -9,6 +10,8 @@ import routes, { RouteInfo } from '@/routes';
 import { AppSideBar } from '../AppSideBar';
 
 import styles from './index.module.less';
+
+const appSideBarEvent = new EventEmitter();
 
 export interface AppHeaderProps {
   title?: string;
@@ -19,6 +22,15 @@ export function AppHeader({ title }: AppHeaderProps) {
   const [popupVisible, setPopupVisible] = useState(false);
   const location = useLocation();
   const navigate = useNavigate();
+  useEffect(() => {
+    const handlePopup = () => {
+      setPopupVisible(true);
+    };
+    appSideBarEvent.on('popup', handlePopup);
+    return () => {
+      appSideBarEvent.off('popup', handlePopup);
+    };
+  }, []);
 
   const isConnected = !!account;
   const showBackArrow = isConnected && location.pathname !== '/';
@@ -83,4 +95,8 @@ function Brand({ title }: AppHeaderProps) {
       <span>{title ?? '雪人理财'}</span>
     </div>
   );
+}
+
+export function popupAppSideBar() {
+  appSideBarEvent.emit('popup');
 }
