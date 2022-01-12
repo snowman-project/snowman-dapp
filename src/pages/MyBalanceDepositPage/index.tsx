@@ -101,10 +101,7 @@ export function MyBalanceDepositPage() {
       <div>
         <div className={styles.container}>
           <div className={styles.info}>充值金额将从您电子钱包账户中扣除</div>
-          <Card
-            title="充值金额"
-            extra={<TokenSymbol symbol={token.symbol}></TokenSymbol>}
-          >
+          <Card title={<TokenSymbol symbol={token.symbol}></TokenSymbol>}>
             <VirtualInput
               ref={inputRef}
               className={styles.input}
