@@ -16,7 +16,7 @@ export interface AppHeaderProps {
 
 export function AppHeader({ title }: AppHeaderProps) {
   const { account } = useEthers();
-  const [visible, setVisible] = useState(false);
+  const [popupVisible, setPopupVisible] = useState(false);
   const location = useLocation();
   const navigate = useNavigate();
 
@@ -50,7 +50,7 @@ export function AppHeader({ title }: AppHeaderProps) {
           isConnected && (
             <MoreOutline
               fontSize="1.5rem"
-              onClick={() => setVisible(!visible)}
+              onClick={() => setPopupVisible(!popupVisible)}
             />
           )
         }
@@ -60,13 +60,13 @@ export function AppHeader({ title }: AppHeaderProps) {
       </NavBar>
       {isConnected && (
         <Popup
-          visible={visible}
+          visible={popupVisible}
           position="right"
           onMaskClick={() => {
-            setVisible(false);
+            setPopupVisible(false);
           }}
         >
-          <AppSideBar onClose={() => setVisible(false)} />
+          <AppSideBar onClose={() => setPopupVisible(false)} />
         </Popup>
       )}
     </>
