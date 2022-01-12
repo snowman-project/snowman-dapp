@@ -1,9 +1,5 @@
 import { List } from 'antd-mobile';
-import {
-  PayCircleOutline,
-  ReceivePaymentOutline,
-  UnorderedListOutline,
-} from 'antd-mobile-icons';
+import { PayCircleOutline, UnorderedListOutline } from 'antd-mobile-icons';
 import { useNavigate } from 'react-router';
 
 export interface AppMenuProps {
@@ -34,7 +30,10 @@ export function AppMenu({ onClose }: AppMenuProps) {
         </List.Item>
       </List>
       <List header="投资与理财">
-        <List.Item prefix={<ReceivePaymentOutline />}>双币理财</List.Item>
+        <List.Item onClick={() => jumpTo('/products')}>全部理财</List.Item>
+        <List.Item onClick={() => jumpTo('/products?categoryId=1')}>
+          双币理财
+        </List.Item>
       </List>
     </div>
   );
