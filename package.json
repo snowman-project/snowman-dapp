@@ -6,7 +6,7 @@
   "author": "Henry Li <henry1943@163.com>",
   "license": "MIT",
   "scripts": {
-    "build": "webpack --config scripts/webpack/webpack.prod.config.js",
+    "build": "webpack --config scripts/webpack/webpack.prod.config.js --node-env=production",
     "deploy": "npm run build && npm run deploy:gh",
     "deploy:gh": "echo 'Publishing DApp to GitHub pages...' && gh-pages -d dist",
     "dev": "webpack-dev-server --config scripts/webpack/webpack.dev.config.js",

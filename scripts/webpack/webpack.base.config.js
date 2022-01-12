@@ -43,9 +43,14 @@ module.exports = {
       },
     }),
     new HtmlWebpackPlugin({
+      template: path.resolve(__dirname, '../../src/index.ejs'),
       filename: path.resolve(__dirname, '../../dist/index.html'),
-      template: path.resolve(__dirname, '../../src/index.html'),
+      templateParameters: {
+        isProduction: process.env.NODE_ENV === 'production',
+      },
       inject: 'body',
     }),
   ],
 };
+
+console.info('NODE_ENV', process.env.NODE_ENV);
