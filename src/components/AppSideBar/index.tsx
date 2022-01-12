@@ -3,9 +3,9 @@ import { List } from 'antd-mobile';
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router';
 
-import { AppMenu } from '../AppMenu';
-
 import { useAccount } from '@/hooks';
+
+import { AppMenu } from '../AppMenu';
 
 import styles from './index.module.less';
 
