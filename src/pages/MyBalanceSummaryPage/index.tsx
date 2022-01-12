@@ -39,22 +39,22 @@ export function MyBalanceSummaryPage() {
           return (
             <List.Item
               key={tokenSymbol}
-              extra={<h3>{formatERC20(balance, token) ?? '-'}</h3>}
+              prefix={
+                <TokenSymbol
+                  symbol={tokenSymbol}
+                  displayText={false}
+                  size="2.4rem"
+                />
+              }
+              extra={
+                <div className={styles.balance}>
+                  {formatERC20(balance, token) ?? '-'}
+                </div>
+              }
+              description={token.name}
               onClick={() => navigate(tokenSymbol.toLowerCase())}
             >
-              <div className={styles.listItem}>
-                <div>
-                  <TokenSymbol
-                    symbol={tokenSymbol}
-                    displayText={false}
-                    size="2.4rem"
-                  />
-                </div>
-                <div className={styles.twoLines}>
-                  <h3>{tokenSymbol}</h3>
-                  <div>{token.name}</div>
-                </div>
-              </div>
+              <div className={styles.symbolName}>{tokenSymbol}</div>
             </List.Item>
           );
         })}
