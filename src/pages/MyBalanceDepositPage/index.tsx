@@ -1,4 +1,4 @@
-import { useContractFunction, useEthers, useTokenBalance } from '@usedapp/core';
+import { useEthers, useTokenBalance } from '@usedapp/core';
 import {
   Button,
   Card,
@@ -8,32 +8,31 @@ import {
   Toast,
   VirtualInput,
 } from 'antd-mobile';
-import { ethers, Contract } from 'ethers';
+import { ethers } from 'ethers';
 import { useEffect, useRef, useState } from 'react';
-import { useNavigate, useParams } from 'react-router';
+import { useNavigate } from 'react-router';
 
-import config from '@/config';
 import { TokenSymbol } from '@/components/TokenSymbol';
 import { formatERC20 } from '@/utils/format-erc20';
 
 import styles from './index.module.less';
-import { SnowmanAccount } from '@/contracts';
+import { useSignedContractFunction, useTokenFromRouteParams } from '@/hooks';
+import { Contracts } from 'snowman-contracts';
 
 export function MyBalanceDepositPage() {
-  const params = useParams();
   const navigate = useNavigate();
   const { account, library } = useEthers();
-  const readonlyToken = params.symbol
-    ? config.supportedTokens.find(
-        (token) => token.symbol === params.symbol?.toUpperCase()
-      )
-    : undefined;
+  const readonlyToken = useTokenFromRouteParams();
   const tokenBalance = useTokenBalance(
     account && readonlyToken?.address,
     account
   );
-  const { state: depositState, send: deposit } = useContractFunction(
-    SnowmanAccount,
+  const { send: approve } = useSignedContractFunction(
+    readonlyToken ? readonlyToken.symbol : 'USDC',
+    'approve'
+  );
+  const { state: depositState, send: deposit } = useSignedContractFunction(
+    'SnowmanAccount',
     'deposit'
   );
   const [amount, setAmount] = useState<number | null>(null);
@@ -57,7 +56,7 @@ export function MyBalanceDepositPage() {
         </Button>
       </div>
     );
-  } else if (account && library && params.symbol) {
+  } else if (account && library) {
     if (readonlyToken) {
       const handleAmountChange = (value: string) => {
         setAmount(parseInt(value));
@@ -79,14 +78,8 @@ export function MyBalanceDepositPage() {
             maskClickable: false,
           });
 
-          const signer = library.getSigner(account);
-          const token = new Contract(
-            readonlyToken.address,
-            readonlyToken.interface,
-            signer
-          );
-          await token.approve(SnowmanAccount.address, amountBN);
-          await deposit(token.address, amountBN);
+          await approve(Contracts.SnowmanAccount.address, amountBN);
+          await deposit(readonlyToken.address, amountBN);
           Toast.clear();
         }
       };

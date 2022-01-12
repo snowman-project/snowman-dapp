@@ -3,17 +3,15 @@ import { useNavigate } from 'react-router';
 
 import { ERC20Token } from 'snowman-contracts';
 
-import config from '@/config';
 import { TokenSymbol } from '@/components/TokenSymbol';
-import { useAccount, useContractView, useSymbolFromParams } from '@/hooks';
+import { useAccount, useContractView, useTokenFromRouteParams } from '@/hooks';
 import { formatERC20 } from '@/utils/format-erc20';
 
 import styles from './index.module.less';
 
 export function MyBalanceDetailPage() {
   const navigate = useNavigate();
-  const tokenSymbol = useSymbolFromParams();
-  const token = tokenSymbol && config.supportedTokens[tokenSymbol];
+  const token = useTokenFromRouteParams();
   if (token) {
     return (
       <div className={styles.container}>
