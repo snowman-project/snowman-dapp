@@ -1,4 +1,4 @@
-import { List } from 'antd-mobile';
+import { DotLoading, List } from 'antd-mobile';
 import { useNavigate } from 'react-router';
 import { BigNumber } from 'ethers';
 
@@ -25,7 +25,13 @@ export function MyBalanceSummaryPage() {
       )
     ) ?? [];
   const navigate = useNavigate();
-
+  if (results.length === 0) {
+    return (
+      <div className={styles.loading}>
+        <DotLoading />
+      </div>
+    );
+  }
   return (
     <div>
       <List header="我在雪人账户中持有的">
