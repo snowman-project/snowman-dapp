@@ -1,11 +1,14 @@
 import { DAppProvider } from '@usedapp/core';
 import { useLocation, matchRoutes, useRoutes } from 'react-router-dom';
+import { QueryClient, QueryClientProvider } from 'react-query';
 
 import { AppHeader } from '@/components/AppHeader';
 import routes, { RouteInfo } from '@/routes';
 import useDAppConfig from '@/use-dapp.config';
 
 import styles from './index.module.less';
+
+const queryClient = new QueryClient();
 
 export function App() {
   const content = useRoutes(routes);
@@ -20,11 +23,13 @@ export function App() {
     }
   }
   return (
-    <DAppProvider config={useDAppConfig}>
-      <div className={styles.container}>
-        <AppHeader title={title} />
-        {content}
-      </div>
-    </DAppProvider>
+    <QueryClientProvider client={queryClient}>
+      <DAppProvider config={useDAppConfig}>
+        <div className={styles.container}>
+          <AppHeader title={title} />
+          {content}
+        </div>
+      </DAppProvider>
+    </QueryClientProvider>
   );
 }
