@@ -8,6 +8,7 @@ import {
   Toast,
   VirtualInput,
 } from 'antd-mobile';
+import type { VirtualInputRef } from 'antd-mobile/es/components/virtual-input';
 import { ethers } from 'ethers';
 import { useEffect, useRef, useState } from 'react';
 import { useNavigate } from 'react-router';
@@ -37,7 +38,7 @@ export function MyBalanceDepositPage() {
     'deposit'
   );
   const [amount, setAmount] = useState<number | null>(null);
-  const inputRef = useRef<any>(null);
+  const inputRef = useRef<VirtualInputRef>(null);
   useEffect(() => {
     inputRef.current?.focus();
   }, []);
@@ -94,7 +95,7 @@ export function MyBalanceDepositPage() {
           }
         }
       }
-      inputRef?.current.focus();
+      inputRef.current?.focus();
     };
     return (
       <div>

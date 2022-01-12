@@ -1,5 +1,6 @@
 import { shortenAddress } from '@usedapp/core';
 import { Input, Toast } from 'antd-mobile';
+import type { InputRef } from 'antd-mobile/es/components/input';
 import { CheckCircleOutline, EditSOutline } from 'antd-mobile-icons';
 import { useMemo, useRef, useState } from 'react';
 
@@ -13,7 +14,7 @@ export function MyProfilePage() {
   const { account, accountNickName, changeAccountNickName } = useAccount();
   const [editing, setEditing] = useState(false);
   const [editingAccountName, setEditingAccountName] = useState('');
-  const inputRef = useRef<any>(null);
+  const inputRef = useRef<InputRef>(null);
   const qrCodeImageURL = useMemo(() => {
     if (account) {
       const url = new URL(
