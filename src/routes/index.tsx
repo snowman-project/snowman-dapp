@@ -5,6 +5,7 @@ import { MyBalanceDepositPage } from '@/pages/MyBalanceDepositPage';
 import { MyBalanceDetailPage } from '@/pages/MyBalanceDetailPage';
 import { MyBalanceSummaryPage } from '@/pages/MyBalanceSummaryPage';
 import { MyProfilePage } from '@/pages/MyProfilePage';
+import { ProductListPage } from '@/pages/ProductListPage';
 
 export interface RouteInfo extends RouteObject {
   title?: string;
@@ -52,6 +53,16 @@ const routes: RouteInfo[] = [
                 ],
               },
             ],
+          },
+        ],
+      },
+      {
+        path: 'products',
+        children: [
+          {
+            index: true,
+            title: '理财产品',
+            element: <ProductListPage />,
           },
         ],
       },
