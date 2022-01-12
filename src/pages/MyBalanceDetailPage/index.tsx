@@ -12,6 +12,7 @@ import styles from './index.module.less';
 export function MyBalanceDetailPage() {
   const navigate = useNavigate();
   const token = useTokenFromRouteParams();
+
   if (token) {
     return (
       <div className={styles.container}>

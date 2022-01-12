@@ -25,6 +25,7 @@ export function MyBalanceSummaryPage() {
       )
     ) ?? [];
   const navigate = useNavigate();
+
   return (
     <div>
       <List header="我在雪人账户中持有的">

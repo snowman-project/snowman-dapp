@@ -19,6 +19,7 @@ export function AppHeader({ title }: AppHeaderProps) {
   const [visible, setVisible] = useState(false);
   const location = useLocation();
   const navigate = useNavigate();
+
   const isConnected = !!account;
   const showBackArrow = isConnected && location.pathname !== '/';
   const handleBack = () => {

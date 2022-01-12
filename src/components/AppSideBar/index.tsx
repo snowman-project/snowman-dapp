@@ -21,6 +21,7 @@ export function AppSideBar({ onClose }: AppSideBarProps) {
       (window as any).jdenticon();
     }
   }, [account]);
+
   if (account) {
     const shortenAccount = shortenAddress(account);
     const handleJumpToProfile = () => {

@@ -5,6 +5,7 @@ import styles from './index.module.less';
 
 export function ConnectButton() {
   const { activateBrowserWallet, account } = useEthers();
+
   return (
     <div className={styles.container}>
       <>

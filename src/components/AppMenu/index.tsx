@@ -12,6 +12,7 @@ export interface AppMenuProps {
 
 export function AppMenu({ onClose }: AppMenuProps) {
   const navigate = useNavigate();
+
   const jumpTo = (path: string) => {
     navigate(path);
     onClose && onClose();

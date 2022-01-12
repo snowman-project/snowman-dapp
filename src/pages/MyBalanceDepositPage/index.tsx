@@ -1,4 +1,4 @@
-import { useEthers, useTokenBalance } from '@usedapp/core';
+import { useTokenBalance } from '@usedapp/core';
 import {
   Button,
   Card,
@@ -16,19 +16,20 @@ import { TokenSymbol } from '@/components/TokenSymbol';
 import { formatERC20 } from '@/utils/format-erc20';
 
 import styles from './index.module.less';
-import { useSignedContractFunction, useTokenFromRouteParams } from '@/hooks';
+import {
+  useAccount,
+  useSignedContractFunction,
+  useTokenFromRouteParams,
+} from '@/hooks';
 import { Contracts } from 'snowman-contracts';
 
 export function MyBalanceDepositPage() {
+  const { account } = useAccount();
   const navigate = useNavigate();
-  const { account, library } = useEthers();
-  const readonlyToken = useTokenFromRouteParams();
-  const tokenBalance = useTokenBalance(
-    account && readonlyToken?.address,
-    account
-  );
+  const token = useTokenFromRouteParams();
+  const tokenBalance = useTokenBalance(account && token?.address, account);
   const { send: approve } = useSignedContractFunction(
-    readonlyToken ? readonlyToken.symbol : 'USDC',
+    token ? token.symbol : 'USDC',
     'approve'
   );
   const { state: depositState, send: deposit } = useSignedContractFunction(
@@ -40,110 +41,109 @@ export function MyBalanceDepositPage() {
   useEffect(() => {
     inputRef.current?.focus();
   }, []);
-  if (depositState.status === 'Success') {
-    return (
-      <div className={styles.container}>
-        <Result
-          className={styles.result}
-          status="success"
-          title={
-            readonlyToken && amount ? `+ ${amount} ${readonlyToken.symbol}` : ''
-          }
-          description={readonlyToken && `您的雪人账户余额已成功充值`}
-        />
-        <Button block color="success" onClick={() => navigate(-1)}>
-          返回
-        </Button>
-      </div>
-    );
-  } else if (account && library) {
-    if (readonlyToken) {
-      const handleAmountChange = (value: string) => {
-        setAmount(parseInt(value));
-      };
-      const handleDeposit = async () => {
-        if (amount && tokenBalance) {
-          const amountBN = ethers.utils.parseUnits(
-            amount.toString(),
-            readonlyToken.decimals
-          );
-          if (amountBN.gt(tokenBalance)) {
-            Toast.show({ content: '余额不足', icon: 'fail' });
-            return;
-          }
-          Toast.show({
-            content: '正在提交',
-            icon: 'loading',
-            duration: 0,
-            maskClickable: false,
-          });
 
-          await approve(Contracts.SnowmanAccount.address, amountBN);
-          await deposit(readonlyToken.address, amountBN);
-          Toast.clear();
-        }
-      };
-      const handleDepositAll = () => {
-        if (tokenBalance) {
-          const a = formatERC20(tokenBalance, readonlyToken);
-          if (a) {
-            const fixAmount = parseInt(a);
-            if (fixAmount > 0) {
-              setAmount(fixAmount);
-            }
-          }
-        }
-        inputRef?.current.focus();
-      };
+  if (account && token) {
+    if (depositState.status === 'Success') {
       return (
-        <div>
-          <div className={styles.container}>
-            <div className={styles.info}>充值金额将从您电子钱包账户中扣除</div>
-            <Card
-              title="充值金额"
-              extra={<TokenSymbol symbol={readonlyToken.symbol}></TokenSymbol>}
-            >
-              <VirtualInput
-                ref={inputRef}
-                className={styles.input}
-                placeholder="输入金额"
-                value={amount ? amount.toString() : ''}
-                keyboard={
-                  <NumberKeyboard
-                    showCloseButton={false}
-                    confirmText="充值"
-                    onConfirm={handleDeposit}
-                  />
-                }
-                onChange={handleAmountChange}
-              />
-            </Card>
-          </div>
-          {tokenBalance && (
-            <List header="您电子钱包中可用余额">
-              <List.Item
-                extra={
-                  tokenBalance.gt(0) ? (
-                    <Button
-                      className={styles.depositAllButton}
-                      shape="rounded"
-                      size="mini"
-                      onClick={handleDepositAll}
-                    >
-                      自动填充
-                    </Button>
-                  ) : null
-                }
-              >
-                <b className={styles.availTokenBalance}>
-                  {formatERC20(tokenBalance, readonlyToken)}
-                </b>
-              </List.Item>
-            </List>
-          )}
+        <div className={styles.container}>
+          <Result
+            className={styles.result}
+            status="success"
+            title={token && amount ? `+ ${amount} ${token.symbol}` : ''}
+            description={token && `您的雪人账户余额已成功充值`}
+          />
+          <Button block color="success" onClick={() => navigate(-1)}>
+            返回
+          </Button>
         </div>
       );
     }
+
+    const handleAmountChange = (value: string) => {
+      setAmount(parseInt(value));
+    };
+    const handleDeposit = async () => {
+      if (amount && tokenBalance) {
+        const amountBN = ethers.utils.parseUnits(
+          amount.toString(),
+          token.decimals
+        );
+        if (amountBN.gt(tokenBalance)) {
+          Toast.show({ content: '余额不足', icon: 'fail' });
+          return;
+        }
+        Toast.show({
+          content: '正在提交',
+          icon: 'loading',
+          duration: 0,
+          maskClickable: false,
+        });
+
+        await approve(Contracts.SnowmanAccount.address, amountBN);
+        await deposit(token.address, amountBN);
+        Toast.clear();
+      }
+    };
+    const handleDepositAll = () => {
+      if (tokenBalance) {
+        const a = formatERC20(tokenBalance, token);
+        if (a) {
+          const fixAmount = parseInt(a);
+          if (fixAmount > 0) {
+            setAmount(fixAmount);
+          }
+        }
+      }
+      inputRef?.current.focus();
+    };
+    return (
+      <div>
+        <div className={styles.container}>
+          <div className={styles.info}>充值金额将从您电子钱包账户中扣除</div>
+          <Card
+            title="充值金额"
+            extra={<TokenSymbol symbol={token.symbol}></TokenSymbol>}
+          >
+            <VirtualInput
+              ref={inputRef}
+              className={styles.input}
+              placeholder="输入金额"
+              value={amount ? amount.toString() : ''}
+              keyboard={
+                <NumberKeyboard
+                  showCloseButton={false}
+                  confirmText="充值"
+                  onConfirm={handleDeposit}
+                />
+              }
+              onChange={handleAmountChange}
+            />
+          </Card>
+        </div>
+        {tokenBalance && (
+          <List header="您电子钱包中可用余额">
+            <List.Item
+              extra={
+                tokenBalance.gt(0) ? (
+                  <Button
+                    className={styles.depositAllButton}
+                    shape="rounded"
+                    size="mini"
+                    onClick={handleDepositAll}
+                  >
+                    自动填充
+                  </Button>
+                ) : null
+              }
+            >
+              <b className={styles.availTokenBalance}>
+                {formatERC20(tokenBalance, token)}
+              </b>
+            </List.Item>
+          </List>
+        )}
+      </div>
+    );
   }
-  return <div>Unsupported token</div>;
+  return <div></div>;
 }
