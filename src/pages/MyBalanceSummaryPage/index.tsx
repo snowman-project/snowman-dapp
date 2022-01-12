@@ -1,28 +1,27 @@
-import { useContractCalls } from '@usedapp/core';
 import { List } from 'antd-mobile';
 import { useNavigate } from 'react-router';
 import { BigNumber } from 'ethers';
 
 import config from '@/config';
 import { TokenSymbol as TokenSymbol } from '@/components/TokenSymbol';
-import { useAccount } from '@/hooks';
-import { SnowmanAccount } from '@/contracts';
+import { useAccount, useContractViews } from '@/hooks';
 import { formatERC20 } from '@/utils/format-erc20';
 
 import styles from './index.module.less';
 
 export function MyBalanceSummaryPage() {
+  const tokens = Object.values(config.supportedTokens);
   const { account } = useAccount();
   const results =
-    useContractCalls(
-      config.supportedTokens.map(
-        (token) =>
-          account && {
-            address: SnowmanAccount.address,
-            abi: SnowmanAccount.interface,
-            method: 'balanceOf',
-            args: [account, token.address],
-          }
+    useContractViews(
+      tokens.map((token) =>
+        account
+          ? {
+              contract: 'SnowmanAccount',
+              function: 'balanceOf',
+              args: [account, token.address],
+            }
+          : undefined
       )
     ) ?? [];
   const navigate = useNavigate();
@@ -33,8 +32,8 @@ export function MyBalanceSummaryPage() {
           if (!result) {
             return;
           }
-          const balance = result[0] as BigNumber | undefined;
-          const token = config.supportedTokens[i];
+          const balance = result as BigNumber | undefined;
+          const token = tokens[i];
           const tokenSymbol = token.symbol;
           return (
             <List.Item

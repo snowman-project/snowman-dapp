@@ -1,54 +1,47 @@
-import { useContractCall } from '@usedapp/core';
 import { Button, Card } from 'antd-mobile';
-import { BigNumber } from 'ethers';
-import { useNavigate, useParams } from 'react-router';
+import { useNavigate } from 'react-router';
+
+import { ERC20Token } from 'snowman-contracts';
 
 import config from '@/config';
 import { TokenSymbol } from '@/components/TokenSymbol';
-import { ERC20Contract, SnowmanAccount } from '@/contracts';
-import { useAccount } from '@/hooks';
+import { useAccount, useContractView, useSymbolFromParams } from '@/hooks';
 import { formatERC20 } from '@/utils/format-erc20';
 
 import styles from './index.module.less';
 
 export function MyBalanceDetailPage() {
   const navigate = useNavigate();
-  const params = useParams();
-  if (params.symbol) {
-    const tokenSymbol = params.symbol.toUpperCase();
-    const token = config.supportedTokens.find(
-      (token) => token.symbol === tokenSymbol
+  const tokenSymbol = useSymbolFromParams();
+  const token = tokenSymbol && config.supportedTokens[tokenSymbol];
+  if (token) {
+    return (
+      <div className={styles.container}>
+        <Balance token={token} />
+        <Button
+          block
+          color="primary"
+          shape="rounded"
+          size="large"
+          onClick={() => navigate('deposit')}
+        >
+          充值
+        </Button>
+      </div>
     );
-    if (token) {
-      return (
-        <div className={styles.container}>
-          <Balance token={token} />
-          <Button
-            block
-            color="primary"
-            shape="rounded"
-            size="large"
-            onClick={() => navigate('deposit')}
-          >
-            充值
-          </Button>
-        </div>
-      );
-    }
   }
   return <div>Unsupported token</div>;
 }
 
-function Balance({ token }: { token: ERC20Contract }) {
+function Balance({ token }: { token: ERC20Token }) {
   const { account } = useAccount();
-  const [result] = (useContractCall(
+  const result = useContractView(
     account && {
-      address: SnowmanAccount.address,
-      abi: SnowmanAccount.interface,
-      method: 'balanceOf',
+      contract: 'SnowmanAccount',
+      function: 'balanceOf',
       args: [account, token.address],
     }
-  ) ?? []) as (BigNumber | undefined)[];
+  );
   return (
     <div className={styles.balanceContainer}>
       <div className={styles.info}>我在雪人账户中持有的</div>

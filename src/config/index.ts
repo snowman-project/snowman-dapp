@@ -1,8 +1,5 @@
-import { USDCToken, WETHToken } from '@/contracts';
-
-const SUPPORTED_TOKENS = [USDCToken, WETHToken];
+import { SUPPORTED_ERC20_TOKENS } from 'snowman-contracts';
 
 export default {
-  supportedTokens: [USDCToken, WETHToken],
-  supportedSymbols: SUPPORTED_TOKENS.map((t) => t.symbol),
+  supportedTokens: SUPPORTED_ERC20_TOKENS,
 };
