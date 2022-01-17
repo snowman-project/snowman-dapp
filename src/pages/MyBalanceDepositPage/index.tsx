@@ -87,7 +87,7 @@ export function MyBalanceDepositPage() {
     };
     const handleDepositAll = () => {
       if (tokenBalance) {
-        const a = formatERC20(tokenBalance, token);
+        const a = formatERC20(tokenBalance, token.decimals);
         if (a) {
           const fixAmount = parseInt(a);
           if (fixAmount > 0) {
@@ -135,7 +135,7 @@ export function MyBalanceDepositPage() {
               }
             >
               <b className={styles.availTokenBalance}>
-                {formatERC20(tokenBalance, token)}
+                {formatERC20(tokenBalance, token.decimals)}
               </b>
             </List.Item>
           </List>

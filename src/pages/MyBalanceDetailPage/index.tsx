@@ -49,9 +49,7 @@ function Balance({ token }: { token: ERC20Token }) {
         headerClassName={styles.balanceCardHeader}
         title={<TokenSymbol symbol={token.symbol} />}
       >
-        <div className={styles.balanceValue}>
-          {formatERC20(result, token) ?? '-'}
-        </div>
+        <div className={styles.balanceValue}>{formatERC20(result) ?? '-'}</div>
       </Card>
     </div>
   );

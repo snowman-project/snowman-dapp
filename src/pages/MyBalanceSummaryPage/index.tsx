@@ -54,7 +54,7 @@ export function MyBalanceSummaryPage() {
               }
               extra={
                 <div className={styles.balance}>
-                  {formatERC20(balance, token) ?? '-'}
+                  {formatERC20(balance) ?? '-'}
                 </div>
               }
               description={token.name}
