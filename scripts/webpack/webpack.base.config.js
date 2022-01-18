@@ -9,7 +9,7 @@ module.exports = {
   },
   output: {
     path: path.resolve(__dirname, '../../dist'),
-    filename: '[name]-[hash].js',
+    filename: '[name]-[fullhash].js',
     publicPath: '/snowman-dapp/',
     clean: true,
   },
@@ -23,7 +23,12 @@ module.exports = {
     rules: [
       {
         test: /\.tsx?$/,
-        use: 'ts-loader',
+        loader: 'esbuild-loader',
+        options: {
+          loader: 'tsx',
+          target: 'esnext',
+          tsconfigRaw: require('../../tsconfig.json'),
+        },
         exclude: /node_modules/,
       },
       {
