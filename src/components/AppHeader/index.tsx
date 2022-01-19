@@ -11,7 +11,9 @@ import { AppSideBar } from '../AppSideBar';
 
 import styles from './index.module.less';
 
-const appSideBarEvent = new EventEmitter();
+const appSideBarEvent = new EventEmitter<{
+  popup: () => void;
+}>();
 
 export interface AppHeaderProps {
   title?: string;

@@ -2,14 +2,16 @@ import { useEthers } from '@usedapp/core';
 import EventEmitter from 'eventemitter3';
 import { useEffect, useState } from 'react';
 
-const accountEvent = new EventEmitter();
+const accountEvent = new EventEmitter<{
+  accountNickNameChanged: (nickName: string | null) => void;
+}>();
 
 export function useAccount() {
   const { account } = useEthers();
   const [nameInState, setNameInState] = useState<string | null>('Anonymous');
 
   useEffect(() => {
-    const handleAccountNickNameChanged = (nickName: string) => {
+    const handleAccountNickNameChanged = (nickName: string | null) => {
       setNameInState(nickName);
     };
     accountEvent.on('accountNickNameChanged', (nickName) => {
