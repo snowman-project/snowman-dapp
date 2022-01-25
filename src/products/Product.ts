@@ -1,5 +1,5 @@
 export interface Product {
-  id: number,
+  id: number;
   name: string;
   apy: number;
   underlying: string;

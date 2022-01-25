@@ -1,8 +1,9 @@
+import { useMemo, useRef, useState } from 'react';
+
 import { shortenAddress } from '@usedapp/core';
 import { Input, Toast } from 'antd-mobile';
-import type { InputRef } from 'antd-mobile/es/components/input';
 import { CheckCircleOutline, EditSOutline } from 'antd-mobile-icons';
-import { useMemo, useRef, useState } from 'react';
+import type { InputRef } from 'antd-mobile/es/components/input';
 
 import { useAccount } from '@/hooks';
 

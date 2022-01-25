@@ -1,7 +1,6 @@
+import { useContractCall, useContractCalls } from '@usedapp/core';
 import { Falsy } from '@usedapp/core/dist/esm/src/model/types';
 import { ContractName, Contracts } from 'snowman-contracts';
-
-import { useContractCall, useContractCalls } from '@usedapp/core';
 
 export function useContractView<
   CName extends ContractName,

@@ -1,10 +1,10 @@
-import { searchProducts } from '@/products';
 import { CapsuleTabs } from 'antd-mobile';
 import { useQuery } from 'react-query';
 
 import { AsyncBoundary } from '@/components/AsyncBoundary';
-import { ProductFilters, ProductFilter } from '@/components/ProductFilters';
+import { ProductFilter, ProductFilters } from '@/components/ProductFilters';
 import { ProductList } from '@/components/ProductList';
+import { searchProducts } from '@/products';
 
 import styles from './index.module.less';
 

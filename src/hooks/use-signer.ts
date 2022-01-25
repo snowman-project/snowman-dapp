@@ -1,6 +1,7 @@
+import { useMemo } from 'react';
+
 import { useEthers } from '@usedapp/core';
 import { Signer } from 'ethers';
-import { useMemo } from 'react';
 
 export function useSigner() {
   const { account, library } = useEthers();

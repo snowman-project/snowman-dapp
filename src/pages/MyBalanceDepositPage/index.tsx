@@ -1,3 +1,5 @@
+import { useEffect, useRef, useState } from 'react';
+
 import { useTokenBalance } from '@usedapp/core';
 import {
   Button,
@@ -10,19 +12,18 @@ import {
 } from 'antd-mobile';
 import type { VirtualInputRef } from 'antd-mobile/es/components/virtual-input';
 import { ethers } from 'ethers';
-import { useEffect, useRef, useState } from 'react';
 import { useNavigate } from 'react-router';
+import { Contracts } from 'snowman-contracts';
 
 import { TokenSymbol } from '@/components/TokenSymbol';
-import { formatERC20 } from '@/utils/format-erc20';
-
-import styles from './index.module.less';
 import {
   useAccount,
   useSignedContractFunction,
   useTokenFromRouteParams,
 } from '@/hooks';
-import { Contracts } from 'snowman-contracts';
+import { formatERC20 } from '@/utils/format-erc20';
+
+import styles from './index.module.less';
 
 export function MyBalanceDepositPage() {
   const { account } = useAccount();

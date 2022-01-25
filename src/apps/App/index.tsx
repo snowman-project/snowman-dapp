@@ -1,6 +1,6 @@
 import { DAppProvider } from '@usedapp/core';
-import { useLocation, matchRoutes, useRoutes } from 'react-router-dom';
 import { QueryClient, QueryClientProvider } from 'react-query';
+import { matchRoutes, useLocation, useRoutes } from 'react-router-dom';
 
 import { AppHeader } from '@/components/AppHeader';
 import routes, { RouteInfo } from '@/routes';

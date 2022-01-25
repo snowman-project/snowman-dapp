@@ -1,6 +1,5 @@
 import { Button, Card } from 'antd-mobile';
 import { useNavigate } from 'react-router';
-
 import { ERC20Token } from 'snowman-contracts';
 
 import { TokenSymbol } from '@/components/TokenSymbol';

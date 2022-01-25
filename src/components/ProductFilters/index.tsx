@@ -1,7 +1,8 @@
-import { Picker } from 'antd-mobile';
-import { PickerColumn } from 'antd-mobile/es/components/picker-view';
-import { DownFill } from 'antd-mobile-icons';
 import { useState } from 'react';
+
+import { Picker } from 'antd-mobile';
+import { DownFill } from 'antd-mobile-icons';
+import { PickerColumn } from 'antd-mobile/es/components/picker-view';
 
 import styles from './index.module.less';
 

@@ -1,7 +1,6 @@
-import { ContractName, Contracts, getContract } from 'snowman-contracts';
-
 import { TransactionStatus, useContractFunction } from '@usedapp/core';
 import { LogDescription } from 'ethers/lib/utils';
+import { ContractName, Contracts, getContract } from 'snowman-contracts';
 
 import { useSigner } from './use-signer';
 

@@ -1,9 +1,9 @@
 import { DotLoading, List } from 'antd-mobile';
-import { useNavigate } from 'react-router';
 import { BigNumber } from 'ethers';
+import { useNavigate } from 'react-router';
 
+import { TokenSymbol } from '@/components/TokenSymbol';
 import config from '@/config';
-import { TokenSymbol as TokenSymbol } from '@/components/TokenSymbol';
 import { useAccount, useContractViews } from '@/hooks';
 import { formatERC20 } from '@/utils/format-erc20';
 

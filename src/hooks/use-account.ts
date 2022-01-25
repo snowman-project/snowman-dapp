@@ -1,6 +1,7 @@
+import { useEffect, useState } from 'react';
+
 import { useEthers } from '@usedapp/core';
 import EventEmitter from 'eventemitter3';
-import { useEffect, useState } from 'react';
 
 const accountEvent = new EventEmitter<{
   accountNickNameChanged: (nickName: string | null) => void;
